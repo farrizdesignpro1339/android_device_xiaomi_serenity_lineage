@@ -6,10 +6,11 @@
 # Inherit from the device configuration
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
-# The stock system is Android 15 and the vendor is a VNDK 33 snapshot, so the
-# platform runs a newer Android than the vendor does, which is the normal
-# shape of a port: VNDK is frozen and a vendor never moves
-PRODUCT_SHIPPING_API_LEVEL := 36
+# The stock system is Android 15 and so is this branch, against a VNDK 33
+# vendor. On lineage-23.2 and lineage-24.0 the platform is newer than the
+# stock, which is the normal shape of a port: VNDK is frozen, a vendor stays
+# where it is and the platform moves on
+PRODUCT_SHIPPING_API_LEVEL := 35
 
 ## Device identifier, this must come after all inclusions
 PRODUCT_BRAND := Redmi
