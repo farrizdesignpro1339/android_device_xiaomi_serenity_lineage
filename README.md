@@ -90,7 +90,7 @@ name; device.mk declares the handful it needs itself.
 | Branch | Platform | Shipping API | Notes |
 | :--- | :--- | :--- | :--- |
 | `dev` | shared | | the base every platform branch sits on |
-| `lineage-22.0` | Android 15 | 35 | matches the stock system generation |
+| `lineage-22.0` | Android 15 | 35 | matches the stock system generation, lunch target `lineage_serenity-ap3a-userdebug` |
 | `lineage-23.2` | Android 16 | 36 | the base |
 | `lineage-24.0` | Android 17 | 36 | the toybox `[` builtin moves to a hand declared symlink |
 
@@ -143,6 +143,20 @@ export SERENITY_VENDOR_REPO=$ANDROID_BUILD_TOP/vendor/xiaomi/serenity
 
 `genpolicy.py --write` is a no-op, the writer is `emit.py`. genpolicy only
 prints what it found.
+
+## Lunch targets
+
+| Branch | Lunch target |
+| :--- | :--- |
+| `lineage-22.0` | `lineage_serenity-ap3a-userdebug` |
+| `lineage-23.2` | `lineage_serenity-userdebug` |
+| `lineage-24.0` | `lineage_serenity-userdebug` |
+
+Android 15 is AP3A, so the LineageOS 22 target carries the platform suffix. The
+product makefile is `lineage_serenity.mk` on every branch and `PRODUCT_NAME` is
+`lineage_serenity` on every branch; only the lunch choice differs. The 22.0
+branch lists the plain spelling as well, so `lunch lineage_serenity-userdebug`
+works there too.
 
 ## Notes on the numbers
 
