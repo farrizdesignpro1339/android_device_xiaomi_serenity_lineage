@@ -91,7 +91,7 @@ name; device.mk declares the handful it needs itself.
 | :--- | :--- | :--- | :--- |
 | `lineage-22.0` | Android 15 | 35 | matches the stock system generation |
 | `lineage-23.2` | Android 16 | 36 | the base |
-| `lineage-24.0` | Android 17 | 36 | see below |
+| `lineage-24.0` | Android 17 | 36 | the toybox `[` builtin moves to a hand declared symlink |
 
 A VNDK 33 vendor throughout, which is normal: VNDK is frozen, a vendor stays
 where it is and the platform moves on. What the tree declares is the vendor
@@ -101,6 +101,15 @@ snapshot, so the shipping API follows the platform, not the vendor.
 the platform can load a vendor policy for. It stops at 202404 on
 `lineage-22.0`, because that is what Android 15 has; the other two carry 202504
 as well. Naming a version the platform does not know is a build failure.
+
+Keep the branches apart. They are siblings, not a chain, and a merge between
+them drags the other branch's platform bits along: merging `lineage-22.0` into
+`lineage-23.2` would take the Android 15 shipping API and the trimmed
+compatibility matrix with it, and merging `lineage-24.0` into `lineage-23.2`
+would take the Android 17 changes, where the platform still ships the toybox
+symlink farm and init_boot still wants its own header version. This README is
+the same on all three, so it never conflicts; the files that differ are the
+ones that have to.
 
 ## Regenerating
 
