@@ -107,6 +107,13 @@ if command -v ccache >/dev/null 2>&1; then
     . "$TOP/ccache.env"
 fi
 
+# A merge between two platform branches leaves the tree building the wrong
+# Android, so the platform bits are checked before the long part starts
+if [ -x "$TREE/tools/check-platform.py" ]; then
+    "$TREE/tools/check-platform.py" "$BRANCH" || die "the tree does not hold \
+the platform bits of $BRANCH, fix that before building"
+fi
+
 say "building lineage_serenity, this is the slow part"
 # shellcheck disable=SC1091
 . "$TOP/build/envsetup.sh" >/dev/null
