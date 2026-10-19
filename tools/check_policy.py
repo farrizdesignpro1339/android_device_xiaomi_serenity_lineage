@@ -168,7 +168,8 @@ def main():
 
     # Names the platform declares but does not export to vendor. Informational.
     aosp_declared = set()
-    for sub in ('public', 'private', 'vendor', 'system_ext', 'product'):
+    for sub in (() if not gp.AOSP else ('public', 'private', 'vendor',
+                                        'system_ext', 'product')):
         base = os.path.join(gp.AOSP, sub)
         for dirpath, _dirs, files in os.walk(base):
             if 'compat' in dirpath or 'prebuilts' in dirpath:

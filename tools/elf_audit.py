@@ -9,14 +9,10 @@ from elftools.elf.elffile import ELFFile
 from elftools.elf.dynamic import DynamicSection
 from elftools.common.exceptions import ELFError
 
-# Paths come from the environment so the same script works on any checkout.
-#   SERENITY_TREE        this device tree, the parent of tools/
-#   SERENITY_VENDOR_REPO the vendor repo, the parent of proprietary/
-TREE = os.environ.get('SERENITY_TREE') or os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))
-VENDOR_REPO = os.environ.get('SERENITY_VENDOR_REPO') or os.path.join(
-    os.environ.get('ANDROID_BUILD_TOP', os.path.join(TREE, '..')),
-    'vendor/xiaomi/serenity')
+from config import TREE, VENDOR_REPO, need  # noqa: E402
+
+VENDOR_REPO = need('SERENITY_VENDOR_REPO', VENDOR_REPO,
+                   'SERENITY_VENDOR_REPO=../android_vendor_xiaomi_serenity_lineage')
 LIST = os.path.join(TREE, 'proprietary-files.txt')
 BASE = os.path.join(VENDOR_REPO, 'proprietary')
 ROOTS = (os.path.join(BASE, 'vendor'), os.path.join(BASE, 'odm'))

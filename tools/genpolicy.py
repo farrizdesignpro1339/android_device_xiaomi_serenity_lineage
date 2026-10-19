@@ -15,15 +15,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from cil import inner, load, strip_version  # noqa: E402
 import service_policy as sp  # noqa: E402
 
-# Paths come from the environment so the same script works on any checkout.
-#   TREE     this device tree, the parent of tools/
-#   AOSP     a LineageOS or AOSP checkout, used for the platform policy names
-#   STOCK    an extracted stock tree holding vendor and odm
-TREE = os.environ.get('SERENITY_TREE') or os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))
-AOSP = os.environ.get('SERENITY_AOSP') or os.path.join(
-    os.environ.get('ANDROID_BUILD_TOP', os.path.join(TREE, '..')), 'system', 'sepolicy')
-STOCK = os.environ.get('SERENITY_STOCK') or '/path/to/extracted/stock/tree'
+# Paths come from config.py, which resolves them from the environment or from
+# where the tree happens to sit. See tools/README.md.
+from config import AOSP, STOCK, TREE  # noqa: E402
+from config import need  # noqa: E402
+
+STOCK = need('SERENITY_STOCK', STOCK, 'SERENITY_STOCK=/path/to/stock/tree')
 OUT = os.path.join(TREE, 'sepolicy/vendor')
 SV = os.path.join(STOCK, 'vendor/etc/selinux')
 SO = os.path.join(STOCK, 'odm/etc/selinux')
@@ -84,7 +81,10 @@ def build_platform():
         if head in ('type', 'typeattribute') and args:
             public.add(strip_version(args[0].strip('()')))
     vendor_src = []
-    for dirpath, _dirs, files in os.walk(os.path.join(AOSP, 'vendor')):
+    # Without a checkout there is no platform vendor policy to read, and the
+    # names it holds are then declared here instead
+    for dirpath, _dirs, files in (os.walk(os.path.join(AOSP, 'vendor'))
+                                  if AOSP else []):
         vendor_src.extend(os.path.join(dirpath, f) for f in files if f.endswith('.te'))
     plat_vendor = set()
     hal_macro = re.compile(r'hal_attribute(?:_hwservice|_service)?\(\s*'

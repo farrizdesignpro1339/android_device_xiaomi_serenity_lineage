@@ -11,19 +11,15 @@ import os
 import re
 import sys
 
-TREE = os.environ.get('SERENITY_TREE') or os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))
+from config import AOSP, STOCK as _STOCK, TREE  # noqa: E402
+
 LIST = os.path.join(TREE, 'proprietary-files.txt')
-AOSP = os.environ.get('SERENITY_AOSP') or os.path.join(
-    os.environ.get('ANDROID_BUILD_TOP', os.path.join(TREE, '..')),
-    'system', 'sepolicy')
-_STOCK = os.environ.get('SERENITY_STOCK') or '/path/to/extracted/stock/tree'
 STOCK = {
-    'vendor': os.path.join(_STOCK, 'vendor'),
-    'odm': os.path.join(_STOCK, 'odm'),
+    'vendor': os.path.join(_STOCK or '', 'vendor'),
+    'odm': os.path.join(_STOCK or '', 'odm'),
 }
 
-PLATFORM_CONTEXTS = (
+PLATFORM_CONTEXTS = () if not AOSP else (
     os.path.join(AOSP, 'private/file_contexts'),
     os.path.join(AOSP, 'system_ext/file_contexts'),
     os.path.join(AOSP, 'product/file_contexts'),
@@ -128,7 +124,8 @@ def platform_types():
     """Types the platform declares, those declared exec_type, and the domains
     init enters, both for the platform dirs and for ours."""
     declared, exec_types, transitions, hal_attrs = set(), set(), set(), set()
-    for root in (AOSP, os.path.join(TREE, 'sepolicy')):
+    ours = os.path.join(TREE, 'sepolicy')
+    for root in ((AOSP, ours) if AOSP else (ours,)):
         for dirpath, _dirnames, filenames in os.walk(root):
             if 'prebuilts' in dirpath or 'microdroid' in dirpath:
                 continue
@@ -136,8 +133,7 @@ def platform_types():
                 if not name.endswith('.te'):
                     continue
                 path = os.path.join(dirpath, name)
-                if root.endswith(os.path.join('device_nubia_Z2577', 'sepolicy')) \
-                        and not os.environ.get('SEPOLICY_FULL_TREE'):
+                if root == ours and not os.environ.get('SEPOLICY_FULL_TREE'):
                     text = gotree.tree_text(path)
                 else:
                     text = open(path, encoding='utf-8', errors='ignore').read()
@@ -150,7 +146,8 @@ def platform_types():
                 for m in re.finditer(r'hal_server_domain\(\s*\S+\s*,\s*([A-Za-z0-9_-]+)\s*\)', text):
                     hal_attrs.add(m.group(1))
     # The hal attributes the platform serves, from its compiled policy.
-    for base, _dirs, files in os.walk(os.path.join(AOSP, 'prebuilts')):
+    for base, _dirs, files in (os.walk(os.path.join(AOSP, 'prebuilts'))
+                               if AOSP else []):
         for name in files:
             if not name.endswith('plat_sepolicy.cil'):
                 continue

@@ -7,12 +7,9 @@ import xml.etree.ElementTree as ET
 
 VENDOR = os.path.join(os.environ.get('SERENITY_STOCK', ''),
                      'vendor/etc/vintf')
-_STOCK = os.environ.get('SERENITY_STOCK', '/path/to/extracted/stock/tree')
-# The platform side of the comparison. A stock system partition from the same
-# ROM is the useful reference; point this somewhere else to compare against a
-# different platform.
-PLATFORM = os.environ.get('SERENITY_PLATFORM_VINTF',
-                          os.path.join(_STOCK, 'system/etc/vintf'))
+from config import PLATFORM_VINTF as PLATFORM, STOCK as _STOCK  # noqa: E402
+
+VENDOR = os.path.join(_STOCK or '', 'vendor/etc/vintf')
 
 
 def parse(path):
