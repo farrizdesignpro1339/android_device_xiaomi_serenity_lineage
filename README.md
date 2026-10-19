@@ -89,6 +89,7 @@ name; device.mk declares the handful it needs itself.
 
 | Branch | Platform | Shipping API | Notes |
 | :--- | :--- | :--- | :--- |
+| `dev` | shared | | the base every platform branch sits on |
 | `lineage-22.0` | Android 15 | 35 | matches the stock system generation |
 | `lineage-23.2` | Android 16 | 36 | the base |
 | `lineage-24.0` | Android 17 | 36 | the toybox `[` builtin moves to a hand declared symlink |
@@ -102,14 +103,24 @@ the platform can load a vendor policy for. It stops at 202404 on
 `lineage-22.0`, because that is what Android 15 has; the other two carry 202504
 as well. Naming a version the platform does not know is a build failure.
 
-Keep the branches apart. They are siblings, not a chain, and a merge between
-them drags the other branch's platform bits along: merging `lineage-22.0` into
-`lineage-23.2` would take the Android 15 shipping API and the trimmed
-compatibility matrix with it, and merging `lineage-24.0` into `lineage-23.2`
-would take the Android 17 changes, where the platform still ships the toybox
-symlink farm and init_boot still wants its own header version. This README is
-the same on all three, so it never conflicts; the files that differ are the
-ones that have to.
+`dev` holds what the three platform branches share, and each platform branch
+sits on it. A change that belongs to every platform goes to `dev` and is then
+merged into the three. A change that belongs to one platform goes straight to
+that branch.
+
+Do not merge one platform branch into another. They are siblings, not a chain,
+and a merge drags the other branch's platform bits along: merging
+`lineage-22.0` into `lineage-23.2` would take the Android 15 shipping API and
+the trimmed compatibility matrix with it, and merging `lineage-24.0` into
+`lineage-23.2` would take the Android 17 changes, where the platform still
+ships the toybox symlink farm and init_boot still wants its own header
+version.
+
+The files that differ per branch, and so are the only places a merge from
+`dev` can conflict, are `platform.mk`, the one line with the shipping API, and
+`configs/vintf/framework_compatibility_matrix.xml`, which names the sepolicy
+versions the platform can load a vendor policy for. This README is the same
+everywhere, so it never conflicts.
 
 ## Regenerating
 
