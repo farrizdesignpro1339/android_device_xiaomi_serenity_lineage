@@ -22,13 +22,16 @@ except ImportError:
     ELFFile = None
 
 # The platform installs these at the same vendor path, so shipping the OEM
-# copy produces a duplicate install. Z2577 drops the same four.
+# copy produces a duplicate install. toybox_vendor is in this list because
+# device.mk declares the platform package of the same name, and the stock tree
+# calls its own copy that too
 PLATFORM_TOOLS = {
     'awk',
     'dumpsys',
     'logwrapper',
     'sh',
     'toybox',
+    'toybox_vendor',
 }
 
 # Directories never carried as blobs: the kernel modules live in

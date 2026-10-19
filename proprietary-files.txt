@@ -8725,7 +8725,6 @@ vendor/bin/test-nusensors
 vendor/bin/test_ufs_swp_config
 vendor/bin/thermald
 vendor/bin/toolbox
-vendor/bin/toybox_vendor
 vendor/bin/trafficshow.sh
 vendor/bin/tsupplicant
 vendor/bin/tuica
