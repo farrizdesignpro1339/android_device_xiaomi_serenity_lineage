@@ -90,7 +90,7 @@ name; device.mk declares the handful it needs itself.
 | Branch | Platform | Shipping API | Notes |
 | :--- | :--- | :--- | :--- |
 | `dev` | shared | | the base every platform branch sits on |
-| `lineage-22.0` | Android 15 | 35 | matches the stock system generation |
+| `lineage-22.0` | Android 15 | 35 | matches the stock system generation, lunch target `lineage_serenity-ap3a-userdebug` |
 | `lineage-23.2` | Android 16 | 36 | the base |
 | `lineage-24.0` | Android 17 | 36 | the toybox `[` builtin moves to a hand declared symlink |
 
@@ -144,6 +144,20 @@ export SERENITY_VENDOR_REPO=$ANDROID_BUILD_TOP/vendor/xiaomi/serenity
 `genpolicy.py --write` is a no-op, the writer is `emit.py`. genpolicy only
 prints what it found.
 
+## Lunch targets
+
+| Branch | Lunch target |
+| :--- | :--- |
+| `lineage-22.0` | `lineage_serenity-ap3a-userdebug` |
+| `lineage-23.2` | `lineage_serenity-userdebug` |
+| `lineage-24.0` | `lineage_serenity-userdebug` |
+
+Android 15 is AP3A, so the LineageOS 22 target carries the platform suffix. The
+product makefile is `lineage_serenity.mk` on every branch and `PRODUCT_NAME` is
+`lineage_serenity` on every branch; only the lunch choice differs. The 22.0
+branch lists the plain spelling as well, so `lunch lineage_serenity-userdebug`
+works there too.
+
 ## Notes on the numbers
 
 The stock super is 5120 MiB and carries the `virtual_ab_device` flag with two
@@ -193,6 +207,31 @@ hand in the vendor repo instead.
 The fstab is the full one, not the 11 lines the stock vendor ramdisk ships.
 Xiaomi mounts data, cache and the sdcard from init rc, and a LineageOS port
 needs them in the fstab instead.
+
+## Registering the tree in the build
+
+The build finds device trees through the manifest, not by looking at the
+filesystem. A tree that only sits in `device/xiaomi/serenity` is invisible to
+`lunch`, and the symptom is
+
+    Trying dependencies-only mode on a non-existing device tree?
+
+So the two repos have to be in a manifest. The local manifest is enough:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project name="farrizdesignpro1339/android_device_xiaomi_serenity_lineage"
+           path="device/xiaomi/serenity"
+           branch="lineage-22.0" />
+  <project name="farrizdesignpro1339/android_vendor_xiaomi_serenity_lineage"
+           path="vendor/xiaomi/serenity"
+           branch="lineage-22.0" />
+</manifest>
+```
+
+in `.repo/local_manifests/serenity.xml`, then `repo sync -c --depth 1`.
+`tools/build.sh` writes that file and syncs for you.
 
 ## Verification
 

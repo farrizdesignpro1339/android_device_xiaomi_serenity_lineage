@@ -72,6 +72,23 @@ if [ ! -d "$TOP/vendor/xiaomi/serenity/.git" ]; then
         "$TOP/vendor/xiaomi/serenity"
 fi
 
+# The build finds device trees through the manifest, not by looking at the
+# filesystem, so a tree that only sits in device/ is invisible to lunch. That
+# is what "Trying dependencies-only mode on a non-existing device tree?" means.
+say "registering the device tree and the vendor repo in the manifest"
+mkdir -p "$TOP/.repo/local_manifests"
+cat > "$TOP/.repo/local_manifests/serenity.xml" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project name="farrizdesignpro1339/android_device_xiaomi_serenity_lineage"
+           path="device/xiaomi/serenity"
+           branch="$BRANCH" />
+  <project name="farrizdesignpro1339/android_vendor_xiaomi_serenity_lineage"
+           path="vendor/xiaomi/serenity"
+           branch="$BRANCH" />
+</manifest>
+EOF
+
 say "syncing, shallow, $JOBS jobs"
 repo sync -c -j"$JOBS" --depth 1 --fail-fast
 
@@ -88,6 +105,13 @@ if command -v ccache >/dev/null 2>&1; then
     } > "$TOP/ccache.env"
     # shellcheck disable=SC1091
     . "$TOP/ccache.env"
+fi
+
+# A merge between two platform branches leaves the tree building the wrong
+# Android, so the platform bits are checked before the long part starts
+if [ -x "$TREE/tools/check-platform.py" ]; then
+    "$TREE/tools/check-platform.py" "$BRANCH" || die "the tree does not hold \
+the platform bits of $BRANCH, fix that before building"
 fi
 
 say "building lineage_serenity, this is the slow part"

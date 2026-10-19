@@ -1,15 +1,5 @@
 <compatibility-matrix version="9.0" type="framework">
-    <!--
-    Android 15 branch. The matrix may only name the sepolicy versions the
-    platform can load a vendor policy for, so it stops at 202404 here;
-    lineage-23.2 and lineage-24.0 carry 202504 as well.
--->
-<!--
-    Android 15 branch. The matrix may only name the sepolicy versions the
-    platform can load a vendor policy for, so it stops at 202404 here;
-    lineage-23.2 and lineage-24.0 carry 202504 as well.
--->
-<!-- The vendor sensors service is AIDL v1, the current platform matrices start at v2 -->
+    <!-- The vendor sensors service is AIDL v1, the current platform matrices start at v2 -->
     <hal format="aidl" optional="true">
         <name>android.hardware.sensors</name>
         <interface>
@@ -34,6 +24,7 @@
         <sepolicy-version>33.0</sepolicy-version>
         <sepolicy-version>34.0</sepolicy-version>
         <sepolicy-version>202404</sepolicy-version>
+        <sepolicy-version>202504</sepolicy-version>
     </sepolicy>
     <avb>
         <vbmeta-version>1.0</vbmeta-version>

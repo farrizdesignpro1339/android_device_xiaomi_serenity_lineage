@@ -11,4 +11,4 @@
 #   lineage-23.2  Android 16
 #   lineage-24.0  Android 17
 #
-PRODUCT_SHIPPING_API_LEVEL := 35
+PRODUCT_SHIPPING_API_LEVEL := 36
