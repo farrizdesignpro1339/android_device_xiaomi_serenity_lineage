@@ -208,6 +208,31 @@ The fstab is the full one, not the 11 lines the stock vendor ramdisk ships.
 Xiaomi mounts data, cache and the sdcard from init rc, and a LineageOS port
 needs them in the fstab instead.
 
+## Registering the tree in the build
+
+The build finds device trees through the manifest, not by looking at the
+filesystem. A tree that only sits in `device/xiaomi/serenity` is invisible to
+`lunch`, and the symptom is
+
+    Trying dependencies-only mode on a non-existing device tree?
+
+So the two repos have to be in a manifest. The local manifest is enough:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project name="farrizdesignpro1339/android_device_xiaomi_serenity_lineage"
+           path="device/xiaomi/serenity"
+           branch="lineage-22.0" />
+  <project name="farrizdesignpro1339/android_vendor_xiaomi_serenity_lineage"
+           path="vendor/xiaomi/serenity"
+           branch="lineage-22.0" />
+</manifest>
+```
+
+in `.repo/local_manifests/serenity.xml`, then `repo sync -c --depth 1`.
+`tools/build.sh` writes that file and syncs for you.
+
 ## Verification
 
 Four checkers came over from the Z2577 port and all of them run here. They read
