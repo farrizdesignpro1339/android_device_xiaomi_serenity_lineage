@@ -59,7 +59,7 @@ The tree has to sit at `device/xiaomi/serenity`, the vendor repo at
 
 ```bash
 git clone <this repo> device/xiaomi/serenity
-repo init -u https://github.com/LineageOS/android.git -b lineage-23.2   # or -b lineage-24.0
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.2   # or -b lineage-22.0 / -b lineage-24.0
 repo sync -c -j$(nproc)
 
 # the vendor repo, either with extract-utils or without it
@@ -87,28 +87,29 @@ name; device.mk declares the handful it needs itself.
 
 ## Branches
 
-| Branch | Platform | Notes |
-| :--- | :--- | :--- |
-| `lineage-23.2` | Android 16 | the base |
-| `lineage-24.0` | Android 17 | see below |
+| Branch | Platform | Shipping API | Notes |
+| :--- | :--- | :--- | :--- |
+| `lineage-22.0` | Android 15 | 35 | matches the stock system generation |
+| `lineage-23.2` | Android 16 | 36 | the base |
+| `lineage-24.0` | Android 17 | 36 | the toybox `[` builtin moves to a hand declared symlink |
 
-Against a VNDK 33 vendor, which is normal: VNDK is frozen, a vendor stays where
-it is and the platform moves on.
-`configs/vintf/framework_compatibility_matrix.xml` carries the sepolicy versions
-through 202504, and `PRODUCT_SHIPPING_API_LEVEL` stays 36 on both branches,
-since what the tree declares is the vendor snapshot, not the platform.
+A VNDK 33 vendor throughout, which is normal: VNDK is frozen, a vendor stays
+where it is and the platform moves on. What the tree declares is the vendor
+snapshot, so the shipping API follows the platform, not the vendor.
 
-The two branches differ by three things, all of them Android 17 moving the
-ground under the vendor rather than anything device specific:
+`configs/vintf/framework_compatibility_matrix.xml` names the sepolicy versions
+the platform can load a vendor policy for. It stops at 202404 on
+`lineage-22.0`, because that is what Android 15 has; the other two carry 202504
+as well. Naming a version the platform does not know is a build failure.
 
-- The toybox `[` builtin is declared as an `install_symlink` in `Android.bp`.
-  Android 17 no longer ships the symlink farm with the platform `toybox_vendor`
-  package, so the one symlink the stock carries has to be made by hand.
-  extract-utils would name that module `vendor_bin_[`, which Soong rejects.
-- `BOARD_INIT_BOOT_HEADER_VERSION` and `BOARD_MKBOOTIMG_INIT_ARGS` are gone:
-  init_boot picks its own header version up.
-- The vendor repo is the same blobs on both branches, but it needs the same
-  branch name, because `repo sync` fetches the branch that matches the manifest.
+Keep the branches apart. They are siblings, not a chain, and a merge between
+them drags the other branch's platform bits along: merging `lineage-22.0` into
+`lineage-23.2` would take the Android 15 shipping API and the trimmed
+compatibility matrix with it, and merging `lineage-24.0` into `lineage-23.2`
+would take the Android 17 changes, where the platform still ships the toybox
+symlink farm and init_boot still wants its own header version. This README is
+the same on all three, so it never conflicts; the files that differ are the
+ones that have to.
 
 ## Regenerating
 
