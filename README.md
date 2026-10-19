@@ -59,7 +59,7 @@ The tree has to sit at `device/xiaomi/serenity`, the vendor repo at
 
 ```bash
 git clone <this repo> device/xiaomi/serenity
-repo init -u https://github.com/LineageOS/android.git -b lineage-23.2
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.2   # or -b lineage-24.0
 repo sync -c -j$(nproc)
 
 # the vendor repo, either with extract-utils or without it
@@ -85,10 +85,30 @@ block and declares the symlinks in `Android.bp`. The blobs land as copies
 rather than prebuilt modules, so nothing may ask for a vendor library by module
 name; device.mk declares the handful it needs itself.
 
-The branch is `lineage-23.2`, so the platform is Android 16 against a VNDK 33
-vendor. That gap is normal: VNDK is frozen, a vendor stays where it is and the
-platform moves on. `configs/vintf/framework_compatibility_matrix.xml` carries
-the sepolicy versions through 202504, which is what Android 16 needs.
+## Branches
+
+| Branch | Platform | Notes |
+| :--- | :--- | :--- |
+| `lineage-23.2` | Android 16 | the base |
+| `lineage-24.0` | Android 17 | see below |
+
+Against a VNDK 33 vendor, which is normal: VNDK is frozen, a vendor stays where
+it is and the platform moves on.
+`configs/vintf/framework_compatibility_matrix.xml` carries the sepolicy versions
+through 202504, and `PRODUCT_SHIPPING_API_LEVEL` stays 36 on both branches,
+since what the tree declares is the vendor snapshot, not the platform.
+
+The two branches differ by three things, all of them Android 17 moving the
+ground under the vendor rather than anything device specific:
+
+- The toybox `[` builtin is declared as an `install_symlink` in `Android.bp`.
+  Android 17 no longer ships the symlink farm with the platform `toybox_vendor`
+  package, so the one symlink the stock carries has to be made by hand.
+  extract-utils would name that module `vendor_bin_[`, which Soong rejects.
+- `BOARD_INIT_BOOT_HEADER_VERSION` and `BOARD_MKBOOTIMG_INIT_ARGS` are gone:
+  init_boot picks its own header version up.
+- The vendor repo is the same blobs on both branches, but it needs the same
+  branch name, because `repo sync` fetches the branch that matches the manifest.
 
 ## Regenerating
 
