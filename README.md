@@ -59,7 +59,7 @@ The tree has to sit at `device/xiaomi/serenity`, the vendor repo at
 
 ```bash
 git clone <this repo> device/xiaomi/serenity
-repo init -u https://github.com/LineageOS/android.git -b lineage-23.2
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.2   # or -b lineage-22.0 / -b lineage-24.0
 repo sync -c -j$(nproc)
 
 # the vendor repo, either with extract-utils or without it
@@ -85,10 +85,26 @@ block and declares the symlinks in `Android.bp`. The blobs land as copies
 rather than prebuilt modules, so nothing may ask for a vendor library by module
 name; device.mk declares the handful it needs itself.
 
-The branch is `lineage-23.2`, so the platform is Android 16 against a VNDK 33
-vendor. That gap is normal: VNDK is frozen, a vendor stays where it is and the
-platform moves on. `configs/vintf/framework_compatibility_matrix.xml` carries
-the sepolicy versions through 202504, which is what Android 16 needs.
+## Branches
+
+| Branch | Platform | Shipping API | Notes |
+| :--- | :--- | :--- | :--- |
+| `lineage-22.0` | Android 15 | 35 | matches the stock system generation |
+| `lineage-23.2` | Android 16 | 36 | this branch |
+| `lineage-24.0` | Android 17 | 36 | the toybox `[` builtin moves to a hand declared symlink |
+
+A VNDK 33 vendor throughout, which is normal: VNDK is frozen, a vendor stays
+where it is and the platform moves on. What the tree declares is the vendor
+snapshot, so the shipping API follows the platform, not the vendor.
+
+`configs/vintf/framework_compatibility_matrix.xml` names the sepolicy versions
+the platform can load a vendor policy for. It stops at 202404 on
+`lineage-22.0`, because that is what Android 15 has; the other two carry 202504
+as well. Naming a version the platform does not know is a build failure.
+
+Keep the branches apart. A merge between them drags the Android 17 changes
+onto Android 16, where the platform still ships the toybox symlink farm and
+init_boot still wants its own header version.
 
 ## Regenerating
 
