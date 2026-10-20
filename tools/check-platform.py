@@ -53,20 +53,16 @@ def main():
     api, matrix, lbracket = EXPECTED[branch]
     problems = []
 
-    platform = read('platform.mk')
-    found = re.search(r'PRODUCT_SHIPPING_API_LEVEL\s*:=\s*(\d+)', platform)
-    if not found:
-        problems.append('platform.mk has no PRODUCT_SHIPPING_API_LEVEL')
-    elif int(found.group(1)) != api:
-        problems.append(f'platform.mk says shipping API {found.group(1)}, '
-                        f'{branch} wants {api}')
-
-    # the API level must not also sit in the product file, where a merge can
-    # drop a second copy of it in
+    # the shipping API level lives in the product file, and it is what decides
+    # whether the build comes out as a Treble device at all
     product = read('lineage_serenity.mk')
-    if re.search(r'^\s*PRODUCT_SHIPPING_API_LEVEL', product, re.M):
-        problems.append('lineage_serenity.mk sets PRODUCT_SHIPPING_API_LEVEL '
-                        'as well, it belongs in platform.mk only')
+    found = re.search(r'PRODUCT_SHIPPING_API_LEVEL\s*:=\s*(\d+)', product)
+    if not found:
+        problems.append('lineage_serenity.mk has no PRODUCT_SHIPPING_API_LEVEL, '
+                        'the build would not be a Treble device')
+    elif int(found.group(1)) != api:
+        problems.append(f'lineage_serenity.mk says shipping API '
+                        f'{found.group(1)}, {branch} wants {api}')
 
     versions = re.findall(r'sepolicy-version>(\d+)',
                           read('configs/vintf/framework_compatibility_matrix.xml'))
