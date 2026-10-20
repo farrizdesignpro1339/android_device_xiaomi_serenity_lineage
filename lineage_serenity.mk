@@ -6,9 +6,12 @@
 # Inherit from the device configuration
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
-# The shipping API level is the one value that differs per platform branch, so
-# it lives in platform.mk and only there. A second copy here is a second thing
-# a merge can move on its own.
+# The shipping API level is the one value that differs per platform branch.
+# It has to be set here and not through inherit-product: that call inherits a
+# product, so a file without a PRODUCT_NAME in it does not set the variable.
+# Without it the build has no shipping level, no Treble, and a different
+# vendor layout on top of that.
+PRODUCT_SHIPPING_API_LEVEL := 35
 
 ## Device identifier, this must come after all inclusions
 PRODUCT_BRAND := Redmi
