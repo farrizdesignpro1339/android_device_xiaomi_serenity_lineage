@@ -183,17 +183,12 @@ def main():
         bp.append(f'    src: "proprietary/{rel}",')
         bp.append('    sub_dir: "overlay",')
         bp.append(f'    filename: "{os.path.basename(rel)}",')
-        bp.append('    prebuilt_strip: {')
-        bp.append('        strip: false,')
-        bp.append('    },')
+        # an apk is not an elf, there is nothing to strip, and the flag to
+        # say so is not in this version of soong
         if part == 'odm':
-            bp.append('    odm: {')
-            bp.append('        enabled: true,')
-            bp.append('    },')
+            bp.append('    odm: true,')
         else:
-            bp.append('    vendor: {')
-            bp.append('        enabled: true,')
-            bp.append('    },')
+            bp.append('    vendor: true,')
         bp.append('}')
         bp.append('')
     for link, target in sorted(symlinks.items()):
