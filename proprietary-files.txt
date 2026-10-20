@@ -8570,25 +8570,6 @@ vendor/framework/oat/arm/androidx.camera.extensions.impl.vdex
 vendor/framework/oat/arm64/androidx.camera.extensions.impl.odex
 vendor/framework/oat/arm64/androidx.camera.extensions.impl.vdex
 
-# Runtime resource overlays
-vendor/overlay/AospBtOverlay_Qogirl6/AospBtOverlay_Qogirl6.apk
-vendor/overlay/AospWifiOverlay_Marlin3.apk
-vendor/overlay/MultiuserOverlays.apk
-vendor/overlay/NetworkStackOverlayGsi.apk
-vendor/overlay/SettingsProviderOverlay.apk
-vendor/overlay/TetheringConfigOverlayGsi.apk
-vendor/overlay/UnisocConnectivityOverlayGo.apk
-vendor/overlay/unisoc_overlay_colordisplay.apk
-vendor/overlay/unisoc_overlay_core.apk
-vendor/overlay/unisoc_overlay_core_navbar.apk
-vendor/overlay/unisoc_overlay_core_wifi_display.apk
-vendor/overlay/unisoc_overlay_display_doze.apk
-vendor/overlay/unisoc_overlay_display_vrr.apk
-vendor/overlay/unisoc_overlay_phone.apk
-vendor/overlay/unisoc_overlay_phone_core.apk
-vendor/overlay/unisoc_overlay_phone_hac.apk
-vendor/overlay/unisoc_overlay_power_qogirl6.apk
-
 # Vendor services, minus the tools the platform ships
 vendor/bin/boardid_bin
 vendor/bin/boringssl_self_test32
@@ -10850,8 +10831,4 @@ odm/etc/thermal.conf
 odm/etc/thm_thresh_cfg.xml
 odm/etc/ueventd.rc
 odm/etc/zoom_config.json
-
-# ODM runtime overlays
-odm/overlay/unisoc_overlay_core_max_cached_processed_16.apk
-odm/overlay/unisoc_overlay_core_pinner_service_qogirl6.apk
 
