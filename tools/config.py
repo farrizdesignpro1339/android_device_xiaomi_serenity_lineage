@@ -110,6 +110,11 @@ def need(name, value, hint):
         f'  Set {hint}, or run from a tree that sits next to the stock dump.')
 
 
+def main():
+    print(describe())
+    return 0
+
+
 def describe():
     """A short report, for the Makefile and for the README."""
     rows = (('tree', TREE), ('vendor repo', VENDOR_REPO), ('stock tree', STOCK),
@@ -117,3 +122,7 @@ def describe():
             ('platform vintf', PLATFORM_VINTF))
     return '\n'.join(f'  {label:<13} {value or "(not found)"}'
                      for label, value in rows)
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
