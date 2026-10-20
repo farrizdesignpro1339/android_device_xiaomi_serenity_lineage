@@ -184,11 +184,11 @@ def main():
         bp.append('    sub_dir: "overlay",')
         bp.append(f'    filename: "{os.path.basename(rel)}",')
         # an apk is not an elf, there is nothing to strip, and the flag to
-        # say so is not in this version of soong
-        if part == 'odm':
-            bp.append('    odm: true,')
-        else:
-            bp.append('    vendor: true,')
+        # say so is not in this version of soong.
+        # prebuilt_etc has no odm flag either, the overlays that the stock kept
+        # in odm go to the vendor overlay directory instead, which the
+        # runtime overlay manager scans just the same.
+        bp.append('    vendor: true,')
         bp.append('}')
         bp.append('')
     for link, target in sorted(symlinks.items()):
