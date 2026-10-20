@@ -117,7 +117,7 @@ ships the toybox symlink farm and init_boot still wants its own header
 version.
 
 The files that differ per branch, and so are the only places a merge from
-`dev` can conflict, are `platform.mk`, the one line with the shipping API, and
+`dev` can conflict, are `lineage_serenity.mk`, the one line with the shipping API, and
 `configs/vintf/framework_compatibility_matrix.xml`, which names the sepolicy
 versions the platform can load a vendor policy for. This README is the same
 everywhere, so it never conflicts.
