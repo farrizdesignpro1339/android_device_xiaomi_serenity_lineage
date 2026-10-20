@@ -132,21 +132,27 @@ def main():
     unresolved = sorted(n for n in referenced
                         if n not in declared and n not in public
                         and n not in plat_vendor and n not in KEYWORDS)
+    # what the platform exposes to the vendor, resolved further down
 
-    # A name the platform declares but does not expose to the vendor is a
-    # different problem from a name that is nowhere. The first one means the
-    # rules have to go or the policy has to ship precompiled, the second one
-    # means the port is missing a type.
+    # The platform splits its policy in two. What is in system/sepolicy/public
+    # is what a vendor policy is allowed to use, what is in private is not. A
+    # name from public is fine, a name from private means the rule cannot be
+    # compiled from source and the precompiled policy of the stock has to be
+    # shipped instead, and a name that is nowhere means the port misses a type.
     import config
-    platform_only = set()
+    vendor_visible, platform_only = set(), set()
     if config.AOSP_POLICY:
-        for sub in ('private', 'public', 'vendor', 'product', 'system_ext'):
+        for sub, bucket in (('public', vendor_visible),
+                            ('private', platform_only),
+                            ('vendor', vendor_visible),
+                            ('product', platform_only),
+                            ('system_ext', platform_only)):
             root = os.path.join(config.AOSP_POLICY, sub)
             if not os.path.isdir(root):
                 continue
             for dirpath, _dirs, files in os.walk(root):
                 for name in files:
-                    if not name.endswith('.te'):
+                    if not (name.endswith('.te') or name.endswith('.cil')):
                         continue
                     with open(os.path.join(dirpath, name), encoding='utf-8',
                               errors='ignore') as handle:
@@ -154,21 +160,26 @@ def main():
                             match = re.match(
                                 r'^\s*(?:type|attribute|typeattribute)\s+'
                                 r'([A-Za-z0-9_]+)', line)
+                            if not match:
+                                match = re.match(
+                                    r'^\((?:type|typeattribute)\s+'
+                                    r'([A-Za-z0-9_]+)', line)
                             if match:
-                                platform_only.add(match.group(1))
+                                bucket.add(match.group(1))
 
     missing, private = [], []
     for name in unresolved:
+        if name in vendor_visible:
+            continue
         if name in platform_only:
             private.append(name)
         else:
             missing.append(name)
     if private:
-        print(f'\nplatform declares but does not expose to the vendor: '
+        print(f'\nplatform private, a vendor policy may not use these: '
               f'{len(private)}')
-        print('  a source policy in the tree cannot use these, the rules have to '
-              'go or the\n  precompiled policy of the stock has to be shipped '
-              'instead. First ones:')
+        print('  the rules have to go, or the precompiled policy of the stock '
+              'has to be shipped.\n  first ones:')
         for name in private[:15]:
             print(f'    {name}')
     if missing:
@@ -176,7 +187,7 @@ def main():
         for name in missing[:15]:
             print(f'    {name}')
 
-    for name in unresolved:
+    for name in private + missing:
         problems.append(f'unresolved: {name} at {referenced[name][:3]}')
 
     # labels must point at a name the final policy has
