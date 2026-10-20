@@ -23,6 +23,12 @@ from config import AOSP_POLICY, STOCK, TREE  # noqa: E402
 AOSP = AOSP_POLICY
 from config import need  # noqa: E402
 
+if not STOCK:
+    raise SystemExit(
+        'genpolicy needs the stock tree, the one the vendor blobs came from.\n'
+        '  set SERENITY_STOCK to an extracted stock tree, the one with\n'
+        '  vendor/etc/selinux/vendor_sepolicy.cil in it.\n'
+        '  without it there is no policy to port and nothing to check.')
 STOCK = need('SERENITY_STOCK', STOCK, 'SERENITY_STOCK=/path/to/stock/tree')
 OUT = os.path.join(TREE, 'sepolicy/vendor')
 SV = os.path.join(STOCK, 'vendor/etc/selinux')

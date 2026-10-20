@@ -463,7 +463,9 @@ def vendor_path(repo, blob):
 def main():
     global DEVICE, VENDOR
     ap = argparse.ArgumentParser()
-    ap.add_argument('--aosp', action='append', default=[])
+    ap.add_argument('--aosp', action='append', default=[],
+                    help='a checkout or a system/sepolicy to compare against, '
+                         'defaults to SERENITY_AOSP')
     ap.add_argument('--stock',
                     default=os.environ.get('SERENITY_STOCK', '/path/to/stock/tree'))
     ap.add_argument('--device', default=DEVICE, help='override, for older revisions')
@@ -500,6 +502,12 @@ def main():
 
     # the AOSP corpus, read once, used by P5 and P11
     aosp_mods, paths = {}, {}
+    if not args.aosp:
+        import config
+        for candidate in (config.AOSP_POLICY, config.AOSP):
+            if candidate and os.path.isdir(candidate):
+                args.aosp = [candidate]
+                break
     for root_dir in args.aosp:
         for root, dirs, names in os.walk(root_dir):
             if 'Android.bp' not in names:
