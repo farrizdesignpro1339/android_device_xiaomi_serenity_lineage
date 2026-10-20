@@ -6,6 +6,7 @@ trailing _NN_NN dropped, because the build re-adds it from
 PLATFORM_SEPOLICY_VERSION. Usage: genpolicy.py [--write]
 """
 
+import glob
 import os
 import re
 import sys
@@ -24,12 +25,12 @@ AOSP = AOSP_POLICY
 from config import need  # noqa: E402
 
 if not STOCK:
-    raise SystemExit(
-        'genpolicy needs the stock tree, the one the vendor blobs came from.\n'
-        '  set SERENITY_STOCK to an extracted stock tree, the one with\n'
-        '  vendor/etc/selinux/vendor_sepolicy.cil in it.\n'
-        '  without it there is no policy to port and nothing to check.')
-STOCK = need('SERENITY_STOCK', STOCK, 'SERENITY_STOCK=/path/to/stock/tree')
+    # Only needed to port a policy. Checking the one in the tree works
+    # without it, as long as the platform side is there.
+    print('genpolicy: no stock tree, the platform side only.\n'
+          '  set SERENITY_STOCK to an extracted stock tree to port a policy.\n'
+          '  it is the one with vendor/etc/selinux/vendor_sepolicy.cil in it.')
+STOCK = STOCK or ''
 OUT = os.path.join(TREE, 'sepolicy/vendor')
 SV = os.path.join(STOCK, 'vendor/etc/selinux')
 SO = os.path.join(STOCK, 'odm/etc/selinux')
@@ -83,12 +84,40 @@ def restrip(text):
     return re.sub(r'\b([A-Za-z0-9_]+?)_\d+_\d+\b', r'\1', text)
 
 
+def api_public_types():
+    """The types the platform exposes to the vendor, from the AOSP checkout.
+
+    The stock copy of that list is plat_pub_versioned.cil, which is what the
+    vendor was built against. When the stock tree is not at hand the platform
+    keeps the same list under prebuilts/api, one directory per API level, so
+    the newest one is used.
+    """
+    if not AOSP:
+        return set()
+    base = os.path.join(AOSP, 'prebuilts', 'api')
+    if not os.path.isdir(base):
+        return set()
+    levels = sorted(os.listdir(base))
+    if not levels:
+        return set()
+    newest = os.path.join(base, levels[-1])
+    out = set()
+    for path in sorted(glob.glob(os.path.join(newest, '*.cil'))):
+        for head, args, _src in load([path]):
+            if head in ('type', 'typeattribute') and args:
+                out.add(strip_version(args[0].strip('()')))
+    return out
+
+
 def build_platform():
     """Names the platform hands to vendor policy: public plus plat_vendor."""
     public = set()
-    for head, args, _src in load([PUB_VERSIONED]):
-        if head in ('type', 'typeattribute') and args:
-            public.add(strip_version(args[0].strip('()')))
+    if os.path.isfile(PUB_VERSIONED):
+        for head, args, _src in load([PUB_VERSIONED]):
+            if head in ('type', 'typeattribute') and args:
+                public.add(strip_version(args[0].strip('()')))
+    else:
+        public = api_public_types()
     vendor_src = []
     # Without a checkout there is no platform vendor policy to read, and the
     # names it holds are then declared here instead
