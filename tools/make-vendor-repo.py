@@ -130,12 +130,40 @@ def main():
                 os.rmdir(dirpath)
         print(f'{stale} stale blobs removed')
 
+    # Prebuilt apks, the overlay ones. They may not be copied, they have to be
+    # modules, and they land in the overlay directory of their partition. They
+    # are not in the blob list, so they are copied here as the source of the
+    # module.
+    apks = []
+    for part in ('vendor', 'odm'):
+        base = os.path.join(stock, part, 'overlay')
+        if not os.path.isdir(base):
+            continue
+        for dirpath, _dirs, files in os.walk(base):
+            for name in sorted(files):
+                if not name.endswith('.apk'):
+                    continue
+                src = os.path.join(dirpath, name)
+                rel = os.path.relpath(src, stock)
+                dst = os.path.join(blobs, rel)
+                os.makedirs(os.path.dirname(dst), exist_ok=True)
+                if not os.path.exists(dst) or \
+                        os.path.getsize(dst) != os.path.getsize(src):
+                    shutil.copy2(src, dst)
+                apks.append(rel)
+
     # The vendor mk: one PRODUCT_COPY_FILES block, sorted so a rebuild is stable
     mk = [HEADER, '\nPRODUCT_COPY_FILES += \\\n']
     for entry in sorted(entries):
         blob = entry.partition(';')[0]
         mk.append(f'    proprietary/{blob}:{blob} \\\n')
     mk.append('\n')
+    if apks:
+        mk.append('\n# the prebuilt overlays, they are modules and not copies\n')
+        mk.append('PRODUCT_PACKAGES += \\\n')
+        for rel in apks:
+            name = os.path.basename(rel)[:-len('.apk')]
+            mk.append(f'    {name} \\\n')
     with open(os.path.join(repo, 'serenity-vendor.mk'), 'w') as out:
         out.writelines(mk)
 
@@ -146,6 +174,28 @@ def main():
     # global namespace is what extract-utils does as well.
     bp = ['//', '// SPDX-FileCopyrightText: The Redmi A5 (serenity) Project',
           '// SPDX-License-Identifier: Apache-2.0', '//', '']
+    for rel in apks:
+        part = rel.split('/')[0]
+        name = os.path.basename(rel)[:-len('.apk')]
+        bp.append('// a runtime overlay, a prebuilt apk may not be copied')
+        bp.append('prebuilt_etc {')
+        bp.append(f'    name: "{name}",')
+        bp.append(f'    src: "proprietary/{rel}",')
+        bp.append('    sub_dir: "overlay",')
+        bp.append(f'    filename: "{os.path.basename(rel)}",')
+        bp.append('    prebuilt_strip: {')
+        bp.append('        strip: false,')
+        bp.append('    },')
+        if part == 'odm':
+            bp.append('    odm: {')
+            bp.append('        enabled: true,')
+            bp.append('    },')
+        else:
+            bp.append('    vendor: {')
+            bp.append('        enabled: true,')
+            bp.append('    },')
+        bp.append('}')
+        bp.append('')
     for link, target in sorted(symlinks.items()):
         bp.append('install_symlink {')
         bp.append(f'    name: "{module_name(link)}",')
