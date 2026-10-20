@@ -132,6 +132,50 @@ def main():
     unresolved = sorted(n for n in referenced
                         if n not in declared and n not in public
                         and n not in plat_vendor and n not in KEYWORDS)
+
+    # A name the platform declares but does not expose to the vendor is a
+    # different problem from a name that is nowhere. The first one means the
+    # rules have to go or the policy has to ship precompiled, the second one
+    # means the port is missing a type.
+    import config
+    platform_only = set()
+    if config.AOSP_POLICY:
+        for sub in ('private', 'public', 'vendor', 'product', 'system_ext'):
+            root = os.path.join(config.AOSP_POLICY, sub)
+            if not os.path.isdir(root):
+                continue
+            for dirpath, _dirs, files in os.walk(root):
+                for name in files:
+                    if not name.endswith('.te'):
+                        continue
+                    with open(os.path.join(dirpath, name), encoding='utf-8',
+                              errors='ignore') as handle:
+                        for line in handle:
+                            match = re.match(
+                                r'^\s*(?:type|attribute|typeattribute)\s+'
+                                r'([A-Za-z0-9_]+)', line)
+                            if match:
+                                platform_only.add(match.group(1))
+
+    missing, private = [], []
+    for name in unresolved:
+        if name in platform_only:
+            private.append(name)
+        else:
+            missing.append(name)
+    if private:
+        print(f'\nplatform declares but does not expose to the vendor: '
+              f'{len(private)}')
+        print('  a source policy in the tree cannot use these, the rules have to '
+              'go or the\n  precompiled policy of the stock has to be shipped '
+              'instead. First ones:')
+        for name in private[:15]:
+            print(f'    {name}')
+    if missing:
+        print(f'\nnowhere: {len(missing)}')
+        for name in missing[:15]:
+            print(f'    {name}')
+
     for name in unresolved:
         problems.append(f'unresolved: {name} at {referenced[name][:3]}')
 
