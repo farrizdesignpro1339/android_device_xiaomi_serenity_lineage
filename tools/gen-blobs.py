@@ -105,6 +105,9 @@ def keep_file(rel):
 
     if name.startswith('NOTICE'):
         return False
+    if name.endswith('.apk'):
+        # a prebuilt apk may not be copied, it has to be a module
+        return False
     if rel in VINTF_METADATA:
         return False
     # The build installs its own build.prop into these partitions, from
