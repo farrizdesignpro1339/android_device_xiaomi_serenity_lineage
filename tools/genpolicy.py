@@ -17,7 +17,10 @@ import service_policy as sp  # noqa: E402
 
 # Paths come from config.py, which resolves them from the environment or from
 # where the tree happens to sit. See tools/README.md.
-from config import AOSP, STOCK, TREE  # noqa: E402
+from config import AOSP_POLICY, STOCK, TREE  # noqa: E402
+
+# the platform policy holds the types the vendor is allowed to use
+AOSP = AOSP_POLICY
 from config import need  # noqa: E402
 
 STOCK = need('SERENITY_STOCK', STOCK, 'SERENITY_STOCK=/path/to/stock/tree')

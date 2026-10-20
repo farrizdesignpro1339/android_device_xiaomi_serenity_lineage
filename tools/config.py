@@ -74,11 +74,22 @@ def _checkout(name):
     return None
 
 
+def _policy_dir(checkout):
+    """The platform policy inside a checkout, that is where the types live."""
+    if not checkout:
+        return None
+    candidate = os.path.join(checkout, 'system', 'sepolicy')
+    if os.path.isdir(candidate):
+        return candidate
+    return checkout if os.path.isdir(os.path.join(checkout, 'vendor')) else None
+
+
 STOCK = find_stock()
 VENDOR_REPO = (os.path.abspath(os.environ['SERENITY_VENDOR_REPO'])
                if os.environ.get('SERENITY_VENDOR_REPO')
                else _sibling('android_vendor_xiaomi_*'))
 AOSP = _checkout('SERENITY_AOSP')
+AOSP_POLICY = _policy_dir(AOSP)
 PLATFORM_VINTF = (os.environ.get('SERENITY_PLATFORM_VINTF')
                   or (os.path.join(STOCK, 'system/etc/vintf') if STOCK else None))
 
@@ -102,6 +113,7 @@ def need(name, value, hint):
 def describe():
     """A short report, for the Makefile and for the README."""
     rows = (('tree', TREE), ('vendor repo', VENDOR_REPO), ('stock tree', STOCK),
-            ('AOSP checkout', AOSP), ('platform vintf', PLATFORM_VINTF))
+            ('AOSP checkout', AOSP), ('AOSP policy', AOSP_POLICY),
+            ('platform vintf', PLATFORM_VINTF))
     return '\n'.join(f'  {label:<13} {value or "(not found)"}'
                      for label, value in rows)
