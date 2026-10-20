@@ -152,12 +152,31 @@ def main():
                     shutil.copy2(src, dst)
                 apks.append(rel)
 
-    # The vendor mk: one PRODUCT_COPY_FILES block, sorted so a rebuild is stable
-    mk = [HEADER, '\nPRODUCT_COPY_FILES += \\\n']
+    # The VINTF metadata may not be copied, the build refuses it. The
+    # fragments go out as vintf_fragments modules instead, the manifest and the
+    # compatibility matrix are declared in the device tree.
+    def is_vintf(blob):
+        return '/etc/vintf/' in blob
+
+    fragments = []
+    copies = []
     for entry in sorted(entries):
         blob = entry.partition(';')[0]
+        if is_vintf(blob):
+            fragments.append(blob)
+        else:
+            copies.append(blob)
+
+    mk = [HEADER, '\nPRODUCT_COPY_FILES += \\\n']
+    for blob in copies:
         mk.append(f'    proprietary/{blob}:{blob} \\\n')
     mk.append('\n')
+    if fragments:
+        mk.append('\n# the VINTF fragments, they are modules and not copies\n')
+        mk.append('PRODUCT_PACKAGES += \\\n')
+        for rel in fragments:
+            name = os.path.basename(rel)[:-len('.xml')]
+            mk.append(f'    {name} \\\n')
     if apks:
         mk.append('\n# the prebuilt overlays, they are modules and not copies\n')
         mk.append('PRODUCT_PACKAGES += \\\n')
@@ -174,6 +193,16 @@ def main():
     # global namespace is what extract-utils does as well.
     bp = ['//', '// SPDX-FileCopyrightText: The Redmi A5 (serenity) Project',
           '// SPDX-License-Identifier: Apache-2.0', '//', '']
+    for rel in fragments:
+        name = os.path.basename(rel)[:-len('.xml')]
+        bp.append('// a VINTF fragment, it may not be copied')
+        bp.append('vintf_fragments {')
+        bp.append(f'    name: "{name}",')
+        bp.append(f'    src: "proprietary/{rel}",')
+        bp.append('    relative_install_path: "etc/vintf/manifest",')
+        bp.append('    vendor: true,')
+        bp.append('}')
+        bp.append('')
     for rel in apks:
         part = rel.split('/')[0]
         name = os.path.basename(rel)[:-len('.apk')]
