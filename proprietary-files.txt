@@ -10104,8 +10104,6 @@ vendor/etc/task_profiles.json
 vendor/etc/ueventd.rc
 vendor/etc/uniber.conf
 vendor/etc/usb_audio_policy_configuration.xml
-vendor/etc/vintf/compatibility_matrix.xml
-vendor/etc/vintf/manifest.xml
 vendor/etc/vintf/manifest/ai_engine-default.xml
 vendor/etc/vintf/manifest/android.hardware.biometrics.face-v2.xml
 vendor/etc/vintf/manifest/android.hardware.cas@1.2-service-lazy.xml
@@ -10851,7 +10849,6 @@ odm/etc/sixth_param_voip.txt
 odm/etc/thermal.conf
 odm/etc/thm_thresh_cfg.xml
 odm/etc/ueventd.rc
-odm/etc/vintf/manifest.xml
 odm/etc/zoom_config.json
 
 # ODM runtime overlays

@@ -45,6 +45,17 @@ SKIP_DIRS = {
     'ld.config.29.txt',
 }
 
+# VINTF metadata cannot be installed by copying the file, the build refuses
+# it: "VINTF metadata found in PRODUCT_COPY_FILES, use ODM_MANIFEST_FILE
+# instead". The manifest and the compatibility matrix are declared in
+# BoardConfig.mk and live in the device tree, so they are left out here. The
+# fragments under etc/vintf/manifest/ are ordinary files and stay.
+VINTF_METADATA = (
+    'vendor/etc/vintf/manifest.xml',
+    'vendor/etc/vintf/compatibility_matrix.xml',
+    'odm/etc/vintf/manifest.xml',
+)
+
 # Symlinks that the platform owns and therefore ships itself. The toybox and
 # toolbox symlink farms come from toybox_vendor, and the module loader path is
 # the install_symlink the device tree declares by hand.
@@ -93,6 +104,8 @@ def keep_file(rel):
     name = parts[-1]
 
     if name.startswith('NOTICE'):
+        return False
+    if rel in VINTF_METADATA:
         return False
     # The build installs its own build.prop into these partitions, from
     # vendor.prop and odm.prop. Shipping the stock one would be a second

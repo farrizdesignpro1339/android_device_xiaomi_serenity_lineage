@@ -140,9 +140,12 @@ def main():
         out.writelines(mk)
 
     # The symlinks, both the flattened chains and the two manual ones
+    # No soong_namespace here on purpose. A namespace of its own would have to
+    # be listed in PRODUCT_SOONG_NAMESPACES, and the device tree only lists
+    # itself, so the modules below would never be built. Leaving them in the
+    # global namespace is what extract-utils does as well.
     bp = ['//', '// SPDX-FileCopyrightText: The Redmi A5 (serenity) Project',
-          '// SPDX-License-Identifier: Apache-2.0', '//', '', 'soong_namespace {}',
-          '']
+          '// SPDX-License-Identifier: Apache-2.0', '//', '']
     for link, target in sorted(symlinks.items()):
         bp.append('install_symlink {')
         bp.append(f'    name: "{module_name(link)}",')
