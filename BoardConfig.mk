@@ -89,6 +89,13 @@ BOARD_MKBOOTIMG_ARGS += --dtb_offset 0x01f00000
 # Kernel, the stock image ships as a prebuilt
 # prebuilts/kernel and prebuilts/dtb.img come out of the stock boot and
 # vendor_boot, prebuilts/dtbo.img is the stock dtbo partition
+# The kernel is a prebuilt, the stock image out of the factory ROM. The
+# LineageOS tree carries a kernel source, so the build looks for a
+# configuration and refuses to go on without one, and the prebuilt flag is what
+# makes it use the image instead of building one. It is not allowed on official
+# builds, this is an unofficial one.
+TARGET_KERNEL_CONFIG := serenity_defconfig
+TARGET_FORCE_PREBUILT_KERNEL := true
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilts/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilts/dtb.img
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
