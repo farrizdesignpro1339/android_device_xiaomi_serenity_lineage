@@ -11,7 +11,7 @@ import os
 import re
 import sys
 
-from config import AOSP, STOCK as _STOCK, TREE  # noqa: E402
+from config import AOSP_POLICY as AOSP, STOCK as _STOCK, TREE  # noqa: E402
 
 LIST = os.path.join(TREE, 'proprietary-files.txt')
 STOCK = {
