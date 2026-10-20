@@ -175,13 +175,13 @@ def main():
         mk.append('\n# the VINTF fragments, they are modules and not copies\n')
         mk.append('PRODUCT_PACKAGES += \\\n')
         for rel in fragments:
-            name = os.path.basename(rel)[:-len('.xml')]
+            name = 'vintf_' + os.path.basename(rel)[:-len('.xml')]
             mk.append(f'    {name} \\\n')
     if apks:
         mk.append('\n# the prebuilt overlays, they are modules and not copies\n')
         mk.append('PRODUCT_PACKAGES += \\\n')
         for rel in apks:
-            name = os.path.basename(rel)[:-len('.apk')]
+            name = 'overlay_' + os.path.basename(rel)[:-len('.apk')]
             mk.append(f'    {name} \\\n')
     with open(os.path.join(repo, 'serenity-vendor.mk'), 'w') as out:
         out.writelines(mk)
@@ -196,7 +196,7 @@ def main():
     # The VINTF fragments may not be copied either, the build checks the
     # copies only, so they go out as modules that land in the same place.
     for rel in fragments:
-        name = os.path.basename(rel)[:-len('.xml')]
+        name = 'vintf_' + os.path.basename(rel)[:-len('.xml')]
         bp.append('// a VINTF fragment, it may not be copied')
         bp.append('prebuilt_etc {')
         bp.append(f'    name: "{name}",')
@@ -208,7 +208,7 @@ def main():
         bp.append('')
     for rel in apks:
         part = rel.split('/')[0]
-        name = os.path.basename(rel)[:-len('.apk')]
+        name = 'overlay_' + os.path.basename(rel)[:-len('.apk')]
         bp.append('// a runtime overlay, a prebuilt apk may not be copied')
         bp.append('prebuilt_etc {')
         bp.append(f'    name: "{name}",')
