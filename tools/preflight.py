@@ -566,6 +566,14 @@ def main():
         if blob not in landed:
             fail('P7', f'blob list entry lands in no module or copy rule: {blob}')
 
+    # P15, the build refuses VINTF metadata that is installed by copying it
+    for blob in files:
+        if blob.endswith('/etc/vintf/manifest.xml') or \
+                blob.endswith('/etc/vintf/compatibility_matrix.xml'):
+            fail('P15', f'{blob} is VINTF metadata, it has to be declared '
+                         f'with DEVICE_MANIFEST_FILE, DEVICE_MATRIX_FILE or '
+                         f'ODM_MANIFEST_FILES, not copied')
+
     # P8, install_symlink targets
     stock_names = set()
     for root, dirs, names in os.walk(args.stock):

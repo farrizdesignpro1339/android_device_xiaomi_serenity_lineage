@@ -233,6 +233,19 @@ So the two repos have to be in a manifest. The local manifest is enough:
 in `.repo/local_manifests/serenity.xml`, then `repo sync -c --depth 1`.
 `tools/build.sh` writes that file and syncs for you.
 
+## The VINTF metadata
+
+`vendor/etc/vintf/manifest.xml`, `vendor/etc/vintf/compatibility_matrix.xml` and
+`odm/etc/vintf/manifest.xml` are not blobs. The build refuses a copy of them:
+
+    VINTF metadata found in PRODUCT_COPY_FILES, use ODM_MANIFEST_FILE instead!
+
+They are declared in BoardConfig.mk and live in the device tree, under
+`configs/vintf/`, and `tools/gen-blobs.py` leaves them out of the blob list. The
+fragments under `etc/vintf/manifest/` are ordinary files and do ship as blobs.
+`tools/preflight.py` has a check for this, so a list that brings them back is
+caught before a build.
+
 ## Verification
 
 Four checkers came over from the Z2577 port and all of them run here. They read
