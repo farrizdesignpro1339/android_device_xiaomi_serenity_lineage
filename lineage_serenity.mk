@@ -8,7 +8,7 @@ $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 # The shipping API level is the one value that differs per platform branch, so
 # it lives in its own file and the branches differ by that one line
-$(call inherit-product, $(LOCAL_PATH)/platform.mk)
+PRODUCT_SHIPPING_API_LEVEL := 36
 
 ## Device identifier, this must come after all inclusions
 PRODUCT_BRAND := Redmi
