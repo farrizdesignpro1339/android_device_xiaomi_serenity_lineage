@@ -193,13 +193,16 @@ def main():
     # global namespace is what extract-utils does as well.
     bp = ['//', '// SPDX-FileCopyrightText: The Redmi A5 (serenity) Project',
           '// SPDX-License-Identifier: Apache-2.0', '//', '']
+    # The VINTF fragments may not be copied either, the build checks the
+    # copies only, so they go out as modules that land in the same place.
     for rel in fragments:
         name = os.path.basename(rel)[:-len('.xml')]
         bp.append('// a VINTF fragment, it may not be copied')
-        bp.append('vintf_fragments {')
+        bp.append('prebuilt_etc {')
         bp.append(f'    name: "{name}",')
         bp.append(f'    src: "proprietary/{rel}",')
-        bp.append('    relative_install_path: "etc/vintf/manifest",')
+        bp.append('    sub_dir: "vintf/manifest",')
+        bp.append(f'    filename: "{os.path.basename(rel)}",')
         bp.append('    vendor: true,')
         bp.append('}')
         bp.append('')
