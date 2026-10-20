@@ -113,6 +113,33 @@ def prune(names, domains, dry):
     return removed
 
 
+def drop_private_rules(platform_only, dry):
+    """Rules that use a type the platform keeps to itself cannot compile."""
+    if not platform_only:
+        return []
+    dropped = []
+    for entry in sorted(os.listdir(POLICY)):
+        if not entry.endswith('.te'):
+            continue
+        path = os.path.join(POLICY, entry)
+        with open(path, encoding='utf-8') as handle:
+            lines = handle.readlines()
+        out, changed = [], False
+        for line in lines:
+            match = re.match(
+                r'^\s*(?:allow|dontaudit|auditallow|type_transition)\s+'
+                r'([A-Za-z0-9_]+)\s+([A-Za-z0-9_]+)', line)
+            if match and match.group(2) in platform_only:
+                dropped.append((entry, match.group(2), line.strip()))
+                changed = True
+                continue
+            out.append(line)
+        if changed and not dry:
+            with open(path, 'w', encoding='utf-8') as handle:
+                handle.writelines(out)
+    return dropped
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dry-run', action='store_true')
@@ -138,6 +165,31 @@ def main():
         print(f'  {name}: {", ".join(by_name[name])}')
     if len(by_name) > 40:
         print(f'  ... and {len(by_name) - 40} more')
+
+    private = set()
+    if config.AOSP_POLICY:
+        for sub in ('private', 'product', 'system_ext'):
+            root = os.path.join(config.AOSP_POLICY, sub)
+            if not os.path.isdir(root):
+                continue
+            for dirpath, _dirs, files in os.walk(root):
+                for name in files:
+                    if not name.endswith('.te'):
+                        continue
+                    with open(os.path.join(dirpath, name), encoding='utf-8',
+                              errors='ignore') as handle:
+                        for line in handle:
+                            match = re.match(
+                                r'^\s*(?:type|attribute|typeattribute)\s+'
+                                r'([A-Za-z0-9_]+)', line)
+                            if match:
+                                private.add(match.group(1))
+
+    dropped = drop_private_rules(private, args.dry_run)
+    print(f'{len(dropped)} rules that use a platform private type removed'
+          f'{"" if args.dry_run else ""}')
+    for entry, name, line in dropped[:20]:
+        print(f'  {entry}: {line[:80]}')
 
     if args.dry_run:
         print('\nnothing was written, drop --dry-run to apply')
