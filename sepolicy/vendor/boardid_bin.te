@@ -1,0 +1,22 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type boardid_bin, domain;
+
+type boardid_bin_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(boardid_bin)
+
+allow boardid_bin boardid_bin_exec:file { read getattr map execute open entrypoint };
+allow boardid_bin property_socket_202604:sock_file write;
+allow boardid_bin init_202604:unix_stream_socket connectto;
+allow boardid_bin vendor_initprop_bin_prop:property_service set;
+allow boardid_bin block_device_202604:dir search;
+allow boardid_bin mnt_vendor_file_202604:dir search;
+allow boardid_bin metadata_file_202604:dir { write search };
+allow boardid_bin metadata_file_202604:file { read write create getattr open };
+allow boardid_bin sysfs_dt_firmware_android_202604:dir search;
+allow boardid_bin proc_cmdline_202604:file { read open };
+allow boardid_bin gsi_metadata_file_type:dir search;
+allow boardid_bin metadata_file_202604:dir search;
+allow boardid_bin gsi_public_metadata_file_202604:file { ioctl read getattr lock map open watch watch_reads };
+allow boardid_bin proc_bootconfig_202604:file { ioctl read getattr lock map open watch watch_reads };
+allow boardid_bin proc_cmdline_202604:file { ioctl read getattr lock map open watch watch_reads };
+allow boardid_bin version_info:file { ioctl read getattr lock map open watch watch_reads };

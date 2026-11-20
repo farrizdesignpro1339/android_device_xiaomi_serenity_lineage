@@ -1,0 +1,5 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+allow hal_gatekeeper_default hal_gatekeeper_default_exec:file { read getattr map execute open entrypoint };
+allow hal_gatekeeper_default teetz_device:chr_file { ioctl read write open };
+allow hal_gatekeeper_default kmsg_device_202604:chr_file { write lock append map open };
+allow hal_gatekeeper_default kmsg_device_202604:chr_file getattr;

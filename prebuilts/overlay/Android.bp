@@ -1,0 +1,361 @@
+//
+// SPDX-FileCopyrightText: The Serenity Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+prebuilt_apk {
+    name: "BluetoothLegacyOverlay",
+    src: "BluetoothLegacyOverlay.apk",
+    product_specific: true,
+    override: ["BluetoothLegacyOverlay"],
+}
+
+prebuilt_apk {
+    name: "BluetoothOverlay",
+    src: "BluetoothOverlay.apk",
+    product_specific: true,
+    override: ["BluetoothOverlay"],
+}
+
+prebuilt_apk {
+    name: "DataOnlyOverlay",
+    src: "DataOnlyOverlay.apk",
+    product_specific: true,
+    override: ["DataOnlyOverlay"],
+}
+
+prebuilt_apk {
+    name: "DataOnlySingleSimOverlay",
+    src: "DataOnlySingleSimOverlay.apk",
+    product_specific: true,
+    override: ["DataOnlySingleSimOverlay"],
+}
+
+prebuilt_apk {
+    name: "DualSimOverlay",
+    src: "DualSimOverlay.apk",
+    product_specific: true,
+    override: ["DualSimOverlay"],
+}
+
+prebuilt_apk {
+    name: "MultiuserOverlays",
+    src: "MultiuserOverlays.apk",
+    product_specific: true,
+    override: ["MultiuserOverlays"],
+}
+
+prebuilt_apk {
+    name: "NetworkStackOverlayGo",
+    src: "NetworkStackOverlayGo.apk",
+    product_specific: true,
+    override: ["NetworkStackOverlayGo"],
+}
+
+prebuilt_apk {
+    name: "NetworkStackOverlayGsi",
+    src: "NetworkStackOverlayGsi.apk",
+    product_specific: true,
+    override: ["NetworkStackOverlayGsi"],
+}
+
+prebuilt_apk {
+    name: "SettingsProviderOverlay",
+    src: "SettingsProviderOverlay.apk",
+    product_specific: true,
+    override: ["SettingsProviderOverlay"],
+}
+
+prebuilt_apk {
+    name: "SystemUIOverlay",
+    src: "SystemUIOverlay.apk",
+    product_specific: true,
+    override: ["SystemUIOverlay"],
+}
+
+prebuilt_apk {
+    name: "TetheringConfigOverlay",
+    src: "TetheringConfigOverlay.apk",
+    product_specific: true,
+    override: ["TetheringConfigOverlay"],
+}
+
+prebuilt_apk {
+    name: "TetheringConfigOverlayGo",
+    src: "TetheringConfigOverlayGo.apk",
+    product_specific: true,
+    override: ["TetheringConfigOverlayGo"],
+}
+
+prebuilt_apk {
+    name: "TetheringConfigOverlayGsi",
+    src: "TetheringConfigOverlayGsi.apk",
+    product_specific: true,
+    override: ["TetheringConfigOverlayGsi"],
+}
+
+prebuilt_apk {
+    name: "UnisocConnectivityOverlayGo",
+    src: "UnisocConnectivityOverlayGo.apk",
+    product_specific: true,
+    override: ["UnisocConnectivityOverlayGo"],
+}
+
+prebuilt_apk {
+    name: "UnisocConnectivityOverlayGsi",
+    src: "UnisocConnectivityOverlayGsi.apk",
+    product_specific: true,
+    override: ["UnisocConnectivityOverlayGsi"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_colordisplay",
+    src: "unisoc_overlay_colordisplay.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_colordisplay"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_core",
+    src: "unisoc_overlay_core.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_core"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_core_go",
+    src: "unisoc_overlay_core_go.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_core_go"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_core_max_cached_processed_16",
+    src: "unisoc_overlay_core_max_cached_processed_16.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_core_max_cached_processed_16"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_core_navbar",
+    src: "unisoc_overlay_core_navbar.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_core_navbar"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_core_pinner_service",
+    src: "unisoc_overlay_core_pinner_service.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_core_pinner_service"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_core_pinner_service_qogirl6",
+    src: "unisoc_overlay_core_pinner_service_qogirl6.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_core_pinner_service_qogirl6"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_core_wifi_display",
+    src: "unisoc_overlay_core_wifi_display.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_core_wifi_display"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_display_doze",
+    src: "unisoc_overlay_display_doze.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_display_doze"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_display_thermal_refreshratepolicy",
+    src: "unisoc_overlay_display_thermal_refreshratepolicy.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_display_thermal_refreshratepolicy"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_display_vrr",
+    src: "unisoc_overlay_display_vrr.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_display_vrr"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_phone",
+    src: "unisoc_overlay_phone.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_phone"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_phone_core",
+    src: "unisoc_overlay_phone_core.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_phone_core"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_phone_hac",
+    src: "unisoc_overlay_phone_hac.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_phone_hac"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_power_cpuT606",
+    src: "unisoc_overlay_power_cpuT606.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_power_cpuT606"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_power_cpuT616",
+    src: "unisoc_overlay_power_cpuT616.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_power_cpuT616"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_power_qogirl6",
+    src: "unisoc_overlay_power_qogirl6.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_power_qogirl6"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_uwb_bt_l6",
+    src: "unisoc_overlay_uwb_bt_l6.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_uwb_bt_l6"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_uwb_bt_m2",
+    src: "unisoc_overlay_uwb_bt_m2.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_uwb_bt_m2"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_uwb_bt_m3",
+    src: "unisoc_overlay_uwb_bt_m3.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_uwb_bt_m3"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_uwb_bt_m3le",
+    src: "unisoc_overlay_uwb_bt_m3le.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_uwb_bt_m3le"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_uwb_bt_m3lite",
+    src: "unisoc_overlay_uwb_bt_m3lite.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_uwb_bt_m3lite"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_uwb_bt_m3lite_Integ",
+    src: "unisoc_overlay_uwb_bt_m3lite_Integ.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_uwb_bt_m3lite_Integ"],
+}
+
+prebuilt_apk {
+    name: "unisoc_overlay_uwb_bt_m3lite_Inter",
+    src: "unisoc_overlay_uwb_bt_m3lite_Inter.apk",
+    product_specific: true,
+    override: ["unisoc_overlay_uwb_bt_m3lite_Inter"],
+}
+
+prebuilt_apk {
+    name: "unisoc_res_overlay_colordisplay",
+    src: "unisoc_res_overlay_colordisplay.apk",
+    product_specific: true,
+    override: ["unisoc_res_overlay_colordisplay"],
+}
+
+prebuilt_apk {
+    name: "unisoc_res_overlay_power_qogirl6",
+    src: "unisoc_res_overlay_power_qogirl6.apk",
+    product_specific: true,
+    override: ["unisoc_res_overlay_power_qogirl6"],
+}
+
+prebuilt_apk {
+    name: "unisoc_res_overlay_workduration",
+    src: "unisoc_res_overlay_workduration.apk",
+    product_specific: true,
+    override: ["unisoc_res_overlay_workduration"],
+}
+
+prebuilt_apk {
+    name: "WifiAXDLOverlay",
+    src: "WifiAXDLOverlay.apk",
+    product_specific: true,
+    override: ["WifiAXDLOverlay"],
+}
+
+prebuilt_apk {
+    name: "WifiAXDLOverlayGoogle",
+    src: "WifiAXDLOverlayGoogle.apk",
+    product_specific: true,
+    override: ["WifiAXDLOverlayGoogle"],
+}
+
+prebuilt_apk {
+    name: "WifiAXEOverlay",
+    src: "WifiAXEOverlay.apk",
+    product_specific: true,
+    override: ["WifiAXEOverlay"],
+}
+
+prebuilt_apk {
+    name: "WifiAXEOverlayGoogle",
+    src: "WifiAXEOverlayGoogle.apk",
+    product_specific: true,
+    override: ["WifiAXEOverlayGoogle"],
+}
+
+prebuilt_apk {
+    name: "WifiDisplayUnavailableOverlay",
+    src: "WifiDisplayUnavailableOverlay.apk",
+    product_specific: true,
+    override: ["WifiDisplayUnavailableOverlay"],
+}
+
+prebuilt_apk {
+    name: "WifiOnlyOverlay",
+    src: "WifiOnlyOverlay.apk",
+    product_specific: true,
+    override: ["WifiOnlyOverlay"],
+}
+
+prebuilt_apk {
+    name: "WifiOnlySettingsOverlay",
+    src: "WifiOnlySettingsOverlay.apk",
+    product_specific: true,
+    override: ["WifiOnlySettingsOverlay"],
+}
+
+prebuilt_apk {
+    name: "WifiOverlay",
+    src: "WifiOverlay.apk",
+    product_specific: true,
+    override: ["WifiOverlay"],
+}
+
+prebuilt_apk {
+    name: "WifiOverlayGoogle",
+    src: "WifiOverlayGoogle.apk",
+    product_specific: true,
+    override: ["WifiOverlayGoogle"],
+}

@@ -1,0 +1,32 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type hal_miface_default, domain;
+hal_server_domain(hal_miface_default, hal_miface)
+
+type hal_miface_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_miface_default)
+
+allow hal_miface_default hal_miface_default_exec:file { read getattr map execute open entrypoint };
+allow hal_miface_default servicemanager_202604:binder { call transfer };
+allow hal_miface_default hwservicemanager_202604:binder { call transfer };
+allow hal_miface_default face_vendor_data_file_202604:dir { ioctl read write create getattr setattr lock rename open watch watch_reads add_name remove_name reparent search rmdir };
+allow hal_miface_default face_vendor_data_file_202604:file { ioctl read write create getattr setattr lock append map unlink rename open watch watch_reads };
+allow hal_miface_default tee_device_202604:chr_file { ioctl read write getattr lock append map open watch watch_reads };
+allow hal_miface_default camera_config_prop_202604:file { read getattr map open };
+allow hal_miface_default cameraserver_202604:binder { call transfer };
+allow hal_miface_default cameraserver_202604:fd use;
+allow hal_miface_default fwk_camera_hwservice_202604:hwservice_manager find;
+allow hal_miface_default hal_graphics_allocator_default:binder { call transfer };
+allow hal_miface_default hal_graphics_allocator_default:fd use;
+allow hal_miface_default hal_graphics_allocator_default_tmpfs:file { ioctl read write getattr lock append map open watch watch_reads };
+allow hal_miface_default hal_graphics_mapper_hwservice_202604:hwservice_manager find;
+allow hal_miface_default hidl_token_hwservice_202604:hwservice_manager find;
+allow hal_miface_default fwk_sensor_hwservice_202604:hwservice_manager find;
+allow hal_miface_default property_socket_202604:sock_file write;
+allow hal_miface_default init_202604:unix_stream_socket connectto;
+allow hal_miface_default vendor_secure_camera_prop:property_service set;
+allow hal_miface_default vendor_secure_camera_prop:file { read getattr map open };
+allow hal_miface_default fwk_camera_service_202604:service_manager find;
+allow hal_miface_default hal_graphics_mapper_service_202604:service_manager find;
+allow hal_miface_default system_app_202604:binder { call transfer };
+allow hal_miface_default system_app_202604:fd use;
+allow hal_miface_default hal_graphics_allocator_default:memfd_file { read write map };

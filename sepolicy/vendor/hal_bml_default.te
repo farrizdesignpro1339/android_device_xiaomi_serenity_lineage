@@ -1,0 +1,47 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type hal_bml_default, domain;
+
+type hal_bml_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_bml_default)
+
+allow hal_bml_default hal_bml_default_exec:file { read getattr map execute open entrypoint };
+allow hal_bml_default servicemanager_202604:binder { call transfer };
+allow hal_bml_default hal_networkaidl_service:service_manager add;
+allow hal_bml_default vendor_data_file_202604:file { ioctl read write create getattr setattr append unlink rename open };
+allowxperm hal_bml_default vendor_data_file_202604:file ioctl { 0x5401 };
+allow hal_bml_default vendor_data_file_202604:dir { read write create setattr open add_name remove_name search };
+allow hal_bml_default vendor_data_file_202604:lnk_file { read create getattr unlink };
+allow hal_bml_default vendor_data_file_202604:sock_file { write create unlink };
+allow hal_bml_default vendor_file_202604:file { read getattr map execute open execute_no_trans };
+allow hal_bml_default hal_wifi_hostapd_default_exec:file execute_no_trans;
+allow hal_bml_default hal_wifi_supplicant_default_exec:file execute_no_trans;
+allow hal_bml_default hal_bml_default:udp_socket { ioctl read write create bind getopt setopt };
+allowxperm hal_bml_default hal_bml_default:udp_socket ioctl { 0x8910 0x8914 0x8916 0x891a 0x891c 0x8924 0x8927 0x8931 0x8932 0x8933 0x8946 0x89a2 0x89a3 };
+allow hal_bml_default hal_bml_default:tcp_socket { ioctl create bind connect accept getopt setopt };
+allowxperm hal_bml_default hal_bml_default:tcp_socket ioctl { 0x89a0 0x89a1 0x89a3 };
+allow hal_bml_default hal_bml_default:netlink_generic_socket { read write create getattr bind setopt };
+allow hal_bml_default hal_bml_default:netlink_route_socket { read write create getattr bind setopt nlmsg_read nlmsg_write nlmsg_readpriv nlmsg_getneigh nlmsg };
+allow hal_bml_default hal_bml_default:packet_socket { ioctl read write create bind setopt };
+allowxperm hal_bml_default hal_bml_default:packet_socket ioctl { 0x8927 0x8933 };
+allow hal_bml_default hal_bml_default:unix_stream_socket { ioctl read write create bind listen accept getopt setopt };
+allowxperm hal_bml_default hal_bml_default:unix_stream_socket ioctl { 0x89a2 0x89f0 };
+allow hal_bml_default hal_bml_default:rawip_socket { ioctl read write create getopt setopt };
+allowxperm hal_bml_default hal_bml_default:rawip_socket ioctl { 0x8927 0x8933 };
+allow hal_bml_default hal_bml_default:capability { kill setuid net_bind_service net_admin net_raw };
+allow hal_bml_default wpa_data_file:dir { read write setattr open add_name remove_name search rmdir };
+allow hal_bml_default wpa_data_file:file { read write create getattr setattr open };
+allow hal_bml_default wpa_data_file:sock_file { write create getattr setattr unlink };
+allow hal_bml_default hostapd_data_file:dir { read write create setattr open add_name remove_name search rmdir };
+allow hal_bml_default hostapd_data_file:file { read write create getattr setattr rename open };
+allow hal_bml_default hostapd_data_file:sock_file { write create getattr setattr unlink };
+allow hal_bml_default sysfs_202604:file { read getattr open };
+allow hal_bml_default sysfs_202604:dir { read open search };
+allow hal_bml_default sysfs_net_202604:dir { read open search };
+allow hal_bml_default sysfs_net_202604:file { read getattr open };
+allow hal_bml_default proc_net_202604:file { read write getattr open };
+allow hal_bml_default wifi_hal_prop_202604:file { read getattr map open };
+allow hal_bml_default vendor_wifi_prop:file { read getattr map open };
+allow hal_bml_default platform_app_202604:binder { call transfer };
+allow hal_bml_default platform_app:binder { call transfer };
+allow hal_bml_default port_202604:udp_socket name_bind;
+allow hal_bml_default node_202604:udp_socket node_bind;

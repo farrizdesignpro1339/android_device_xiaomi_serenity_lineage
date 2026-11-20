@@ -1,0 +1,33 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type charge_aged_info, domain;
+
+type charge_aged_info_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(charge_aged_info)
+
+allow charge_aged_info charge_aged_info_exec:file { read getattr map execute open entrypoint };
+allow charge_aged_info device_202604:dir { read write open };
+allow charge_aged_info device_202604:chr_file { create unlink };
+allow charge_aged_info vendor_shell_exec_202604:file { read execute open execute_no_trans };
+allow charge_aged_info charge:capability { sys_admin sys_boot sys_tty_config };
+allow charge_aged_info refnotify_device:chr_file { ioctl read write getattr map execute open entrypoint };
+allow charge_aged_info kmsg_device_202604:chr_file { write open };
+allow charge_aged_info sysfs_202604:file { read write open };
+allow charge_aged_info sysfs_202604:dir { read open };
+allow charge_aged_info prod_file:dir { read getattr open search };
+allow charge_aged_info prod_file:file { ioctl read write getattr setattr lock unlink open };
+allow charge_aged_info sysfs_power_202604:dir { read open search };
+allow charge_aged_info sysfs_power_202604:file { read write open };
+allow charge_aged_info sysfs_extdata:dir { read open search };
+allow charge_aged_info sysfs_extdata:file { read write getattr open };
+allow charge_aged_info sysfs_rtc_202604:dir { read open search };
+allow charge_aged_info sysfs_rtc_202604:file { read write open };
+allow charge_aged_info tty_device_202604:chr_file { ioctl read write open };
+allow charge_aged_info vendor_hwrotation_prop:file { read getattr map open };
+allow charge_aged_info mmcblk_device:blk_file { read write getattr open };
+allow charge_aged_info block_device_202604:dir search;
+allow charge_aged_info ufs_device:blk_file { read write getattr open };
+allow charge_aged_info mnt_vendor_file_202604:dir { read getattr open search };
+allow charge_aged_info mnt_vendor_file_202604:file { read open };
+allow charge_aged_info battery_file:dir { read write getattr open add_name search };
+allow charge_aged_info battery_file:file { read write create getattr setattr open };
+allow charge_aged_info vendor_fs_prop:file { read getattr map open };

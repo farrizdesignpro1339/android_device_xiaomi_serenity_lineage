@@ -1,0 +1,11 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type hal_broadcastradio_ext, domain;
+hal_server_domain(hal_broadcastradio_ext, hal_broadcastradio)
+
+type hal_broadcastradio_ext_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_broadcastradio_ext)
+
+allow hal_broadcastradio_ext hal_broadcastradio_ext_exec:file { read getattr map execute open entrypoint };
+allow hal_broadcastradio_ext system_server_202604:binder call;
+allow hal_broadcastradio_ext fm_device:chr_file { ioctl read write open };
+allow hal_broadcastradio_ext hal_broadcastradio_service_202604:service_manager { add find };

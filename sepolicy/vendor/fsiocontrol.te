@@ -1,0 +1,8 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type fsiocontrol, domain;
+
+type fsiocontrol_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(fsiocontrol)
+
+allow fsiocontrol fsiocontrol_exec:file { read getattr map execute open entrypoint };
+allow fsiocontrol sysfs_202604:file { read write getattr open };

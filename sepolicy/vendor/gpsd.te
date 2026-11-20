@@ -1,0 +1,51 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type gpsd, domain;
+
+type gpsd_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(gpsd)
+
+allow gpsd gpsd_exec:file { read getattr map execute open entrypoint };
+allow gpsd sysfs_wake_lock_202604:file { read write open };
+allow gpsd serial_device_202604:chr_file { ioctl read write open };
+allow gpsd tmpfs_202604:dir { write add_name };
+allow gpsd gnss_file:dir { read write create open add_name remove_name search };
+allow gpsd gnss_file:file { read write create getattr setattr append unlink open };
+allow gpsd shell_202604:netlink_socket { read write create };
+allow gpsd socket_device_202604:sock_file write;
+allow gpsd wcn_device:chr_file { ioctl read write open };
+allow gpsd vendor_shell_exec_202604:file execute;
+allow gpsd self:netlink_route_socket nlmsg_write;
+allow gpsd dnsproxyd_socket_202604:sock_file write;
+allow gpsd vendor_audio_prop:file { read getattr map open };
+allow gpsd vendor_media_prop:file { read getattr map open };
+allow gpsd vendor_radio_prop:file { read getattr map open };
+allow gpsd vendor_modem_prop:file { read getattr map open };
+allow gpsd sysfs_gnss:dir { read open search };
+allow gpsd sysfs_gnss:file { ioctl read write open };
+allow gpsd sysfs_wcn:dir search;
+allow gpsd sysfs_wcn:file { read open };
+allow gpsd hal_gnss_default:unix_dgram_socket sendto;
+allow gpsd tty_device_202604:chr_file { ioctl read write open };
+allow gpsd sensors_device_202604:chr_file { ioctl read write open };
+allow gpsd prod_file:dir { write create open add_name remove_name search };
+allow gpsd prod_file:file { read write create getattr setattr append open };
+allow gpsd port_202604:tcp_socket name_connect;
+allow gpsd self:tcp_socket { ioctl read write create bind connect getopt setopt };
+allow gpsd fwmarkd_socket_202604:sock_file write;
+allow gpsd netd_202604:unix_stream_socket connectto;
+allow gpsd engpc:unix_dgram_socket sendto;
+allow gpsd fwk_sensor_service_202604:service_manager find;
+allow gpsd system_server_202604:binder { call transfer };
+allow gpsd servicemanager_202604:binder { call transfer };
+allow gpsd self:udp_socket { ioctl read write create bind connect getopt setopt };
+allow gpsd port_202604:udp_socket name_bind;
+allow gpsd node_202604:udp_socket node_bind;
+allow gpsd gpsd:netlink_kobject_uevent_socket { read create bind getopt setopt };
+allow gpsd wcnd:unix_stream_socket connectto;
+allow gpsd sysfs_202604:dir { read open };
+allow gpsd sysfs_202604:file { read open };
+allow gpsd sysfs_display_aod_202604:dir search;
+allow gpsd mnt_vendor_file_202604:dir { read write create open add_name remove_name search };
+allow gpsd mnt_vendor_file_202604:file { read write create getattr setattr open };
+allow gpsd vendor_fs_prop:file { read getattr map open };
+allow gpsd proc_202604:file { ioctl read getattr open };

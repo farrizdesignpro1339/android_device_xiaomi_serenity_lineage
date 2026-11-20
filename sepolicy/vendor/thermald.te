@@ -1,0 +1,40 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type thermald, domain;
+
+type thermald_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(thermald)
+
+allow thermald thermald_exec:file { read getattr map execute open entrypoint };
+allow thermald hwservicemanager_202604:binder call;
+allow thermald hwservicemanager_prop_202604:file { read getattr open };
+allow thermald tmpfs_202604:file write;
+allow thermald property_socket_202604:sock_file write;
+allow thermald init_202604:unix_stream_socket connectto;
+allow thermald vendor_thermald_prop:property_service set;
+allow thermald vendor_thermald_prop:file { read getattr map open };
+allow thermald sysfs_202604:file { ioctl read write getattr open };
+allow thermald hal_telephony:memfd_file { read write getattr map };
+allow thermald servicemanager_202604:binder call;
+allow thermald thermald:netlink_kobject_uevent_socket { read create bind getopt setopt };
+allow thermald rild:binder call;
+allow thermald system_file_202604:dir { read open };
+allow thermald sysfs_power_202604:dir search;
+allow thermald sysfs_power_202604:file { read write getattr open };
+allow thermald powerctl_prop_202604:property_service set;
+allow thermald hwservicemanager_prop_202604:file map;
+allow thermald hwservicemanager_202604:binder transfer;
+allow thermald prod_file:file { read write create getattr unlink open };
+allow thermald prod_file:dir { read write getattr open add_name remove_name search rmdir };
+allow thermald kmsg_device_202604:chr_file { write open };
+allow thermald mnt_vendor_file_202604:dir { read write open add_name remove_name search };
+allow thermald mnt_vendor_file_202604:file { read write create getattr unlink open };
+allow thermald sysfs_devices_system_cpu_202604:file { read write };
+allow thermald sysfs_gpu_202604:dir search;
+allow thermald sysfs_gpu_202604:file { write open };
+allow thermald sysfs_leds_202604:dir search;
+allow thermald sysfs_leds_202604:file { write open };
+allow thermald vendor_data_file_202604:dir { read write open add_name remove_name search };
+allow thermald vendor_data_file_202604:file { read write create getattr unlink open };
+allow thermald vendor_file_202604:file { execute execute_no_trans };
+allow thermald thermald:netlink_generic_socket { read write create getattr bind setopt };
+allow thermald thermald:udp_socket { ioctl create };

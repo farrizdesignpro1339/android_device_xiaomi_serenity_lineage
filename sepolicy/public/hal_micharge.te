@@ -1,0 +1,4 @@
+# Vendor hal attribute
+attribute hal_micharge;
+attribute hal_micharge_client;
+attribute hal_micharge_server;

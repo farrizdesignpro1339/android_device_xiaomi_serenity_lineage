@@ -1,0 +1,11 @@
+/system/lib/modules/cdc_ncm.ko: /system/lib/modules/cdc_ether.ko /system/lib/modules/usbnet.ko /system/lib/modules/mii.ko
+/system/lib/modules/rtl8150.ko:
+/system/lib/modules/r8152.ko: /system/lib/modules/mii.ko
+/system/lib/modules/asix.ko: /system/lib/modules/usbnet.ko /system/lib/modules/mii.ko
+/system/lib/modules/rfkill.ko:
+/system/lib/modules/cdc_eem.ko: /system/lib/modules/usbnet.ko /system/lib/modules/mii.ko
+/system/lib/modules/cdc_ether.ko: /system/lib/modules/usbnet.ko /system/lib/modules/mii.ko
+/system/lib/modules/usbnet.ko: /system/lib/modules/mii.ko
+/system/lib/modules/r8153_ecm.ko: /system/lib/modules/r8152.ko /system/lib/modules/cdc_ether.ko /system/lib/modules/usbnet.ko /system/lib/modules/mii.ko
+/system/lib/modules/ax88179_178a.ko: /system/lib/modules/usbnet.ko /system/lib/modules/mii.ko
+/system/lib/modules/mii.ko:

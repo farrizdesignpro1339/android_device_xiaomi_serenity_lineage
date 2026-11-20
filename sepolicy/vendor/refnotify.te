@@ -1,0 +1,32 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type refnotify, domain;
+
+type refnotify_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(refnotify)
+
+allow refnotify refnotify_device:chr_file { ioctl read write open };
+allow refnotify sprd_time_sync_device:chr_file { read open };
+allow refnotify spipe_device:chr_file { ioctl read write open };
+allow refnotify bm_device:chr_file { ioctl read write open };
+allow refnotify sysfs_202604:file { read write open };
+allow refnotify property_socket_202604:sock_file write;
+allow refnotify init_202604:unix_stream_socket connectto;
+allow refnotify powerctl_prop_202604:property_service set;
+allow refnotify rtc_device_202604:chr_file { read write };
+allow refnotify vendor_radio_prop:file { read getattr map open };
+allow refnotify refnotify:netlink_kobject_uevent_socket { read create bind getopt setopt };
+allow refnotify sysfs_iq:file { read open };
+allow refnotify self:capability sys_time;
+allow refnotify self:capability { setgid setuid };
+allow refnotify exported_default_prop_202604:file { read getattr open };
+allow refnotify vendor_sys_prop:file read;
+allow refnotify vendor_sys_prop:property_service set;
+allow refnotify vendor_hwc_prop:property_service set;
+allow refnotify vendor_hwc_prop:file { read open };
+allow refnotify vendor_sys_prop:file { read getattr map open };
+allow refnotify prod_file:dir { read open search };
+allow refnotify prod_file:file { read open };
+allow refnotify vendor_fs_prop:file { read getattr map open };
+allow refnotify refnotify_exec:file { read getattr map execute open entrypoint };
+allow refnotify sysfs_display_aod_202604:dir search;
+allow refnotify mnt_vendor_file_202604:dir search;

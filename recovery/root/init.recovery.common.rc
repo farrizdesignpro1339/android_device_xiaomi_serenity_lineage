@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2016-2023 Unisoc (Shanghai) Technologies Co., Ltd
+# SPDX-License-Identifier: LicenseRef-Unisoc-General-1.0
+
+on init
+    export PATH /sbin:/system/bin:/vendor/bin
+    export SECONDARY_STORAGE /storage/sdcard0
+    mkdir /storage
+    mkdir /storage/sdcard0
+    symlink /storage/sdcard0 /mnt/sdcard
+    loglevel 7
+    # Add standard gadget entries
+    mount configfs none /config
+    mkdir /config/usb_gadget/g1 0770 shell shell
+    write /config/usb_gadget/g1/idVendor 0x1782
+    write /config/usb_gadget/g1/idProduct 0x4d00
+    mkdir /config/usb_gadget/g1/strings/0x409 0770 shell shell
+    write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno}
+    write /config/usb_gadget/g1/strings/0x409/manufacturer Unisoc
+    write /config/usb_gadget/g1/strings/0x409/product "Unisoc Phone"
+    mkdir /config/usb_gadget/g1/configs/b.1 0770 shell shell
+    mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409 0770 shell shell
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "Conf 1"
+    write /config/usb_gadget/g1/configs/b.1/MaxPower 120
+
+    # Create adb+ffs gadget function
+    mkdir /config/usb_gadget/g1/functions/ffs.adb 0770 shell shell
+    mkdir /config/usb_gadget/g1/functions/ffs.fastboot 0770 shell shell
+    mkdir /dev/usb-ffs 0770 shell shell
+    mkdir /dev/usb-ffs/adb 0770 shell shell
+    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
+    mkdir /dev/usb-ffs/fastboot 0770 system system
+    mount functionfs fastboot /dev/usb-ffs/fastboot rmode=0770,fmode=0660,uid=1000,gid=1000
+
+on boot
+    setprop sys.usb.configfs 1
+    write /sys/block/mmcblk0boot0/force_ro 0
+    write /sys/block/mmcblk0boot1/force_ro 0
+
+    chmod 660 /sys/class/power_supply/battery/charger.0/stop_charge
+    chmod 660 /sys/class/power_supply/battery/charger.0/jeita_control
+    chmod 660 /sys/class/power_supply/battery/input_current_limit
+    chmod 660 /sys/class/power_supply/battery/constant_charge_current
+    chmod 660 /sys/class/power_supply/battery/charger.0/keep_awake
+
+on property:ro.bootmode=recovery
+    class_start recovery

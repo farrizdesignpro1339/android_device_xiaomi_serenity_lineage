@@ -1,0 +1,76 @@
+# Stock vendor hwservice types
+type hal_default_algo_hwservice, hwservice_manager_type;
+type hal_default_hdcp_hwservice, hwservice_manager_type;
+
+# Stock vendor policy types
+type cp_diskserver_v2, domain;
+type debugfs_ion, fs_type, debugfs_type;
+type debugfs_pinctrl, fs_type, debugfs_type;
+type debugfs_sipc, fs_type, debugfs_type;
+type hal_codec2_unisoc, domain;
+type hal_cplog_connmgr_default, domain;
+type hal_drm_cdrm, domain;
+type hal_drm_playready, domain;
+type hal_drm_widevine, domain;
+type hal_log_default, mlstrustedsubject, domain;
+type proc_aoniram, fs_type, proc_type;
+type proc_cptlmem, fs_type, proc_type;
+type proc_mini_dump, fs_type, proc_type;
+type proc_pdbg, fs_type, proc_type;
+type proc_pmicmem, fs_type, proc_type;
+type proc_pmicpmsys, fs_type, proc_type;
+type proc_pubcpiram, fs_type, proc_type;
+type proc_sprd_dmc, fs_type, proc_type;
+type proc_uidiodebug, fs_type, proc_type;
+type refnotifyHalService, domain;
+type remosaic_daemon, domain;
+type remosaic_daemon_service;
+type ssmh_info_proc, fs_type, proc_type;
+type vdspserver, domain;
+type vendor_algo_service, domain;
+
+# Stock vendor service types
+type aiserver_service, service_manager_type;
+type android_fp_hwservice, service_manager_type, hwservice_manager_type;
+type gfp_aservice, service_manager_type;
+type hal_ai_engine_service, service_manager_type;
+type hal_camera_postproc_service, service_manager_type;
+type hal_connmgraidl_service, service_manager_type;
+type hal_cplog_svcaidl_default, service_manager_type, mlstrustedobject, domain;
+type hal_cplog_svcaidl_service, service_manager_type, mlstrustedobject;
+type hal_enhanceaidl_service, service_manager_type;
+type hal_hdcp_service, service_manager_type;
+type hal_ifaaaidl_service, service_manager_type;
+type hal_networkaidl_service, service_manager_type;
+type hal_refnotifyaidl_service, service_manager_type;
+type hal_soter_service, service_manager_type;
+type hal_toolaidl_service, service_manager_type;
+type hal_trustyclientaidl_service, service_manager_type;
+type hal_unionpnp_service, service_manager_type;
+type hal_univiewaidl_service, service_manager_type;
+type unistab_vndservice, service_manager_type;
+
+# Stock vendor sysfs types
+type sysfile, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_battery_supply, sysfs_type, fs_type;
+type sysfs_bluetooth_file, sysfs_type, fs_type;
+type sysfs_ddr_dfs, sysfs_type, fs_type;
+type sysfs_dpu_vendor, sysfs_type, fs_type;
+type sysfs_dpu_vsp, sysfs_type, fs_type;
+type sysfs_extdata, sysfs_type, fs_type;
+type sysfs_gnss, sysfs_type, fs_type;
+type sysfs_gpu_boost, sysfs_type, fs_type;
+type sysfs_iq, sysfs_type, fs_type;
+type sysfs_lcd, sysfs_type, fs_type;
+type sysfs_mipi, sysfs_type, fs_type;
+type sysfs_multipanel, sysfs_type, fs_type;
+type sysfs_multipanel_vendor, sysfs_type, fs_type;
+type sysfs_nv, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_qvga, sysfs_type, fs_type;
+type sysfs_sensor, sysfs_type, fs_type;
+type sysfs_ship_mode, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_spool, sysfs_type, fs_type;
+type sysfs_usb_supply, sysfs_type, fs_type;
+type sysfs_wcn, sysfs_type, fs_type;
+type version_info, sysfs_type, fs_type, proc_type;
+type virtual_proximity_file, sysfs_type, fs_type, proc_type;

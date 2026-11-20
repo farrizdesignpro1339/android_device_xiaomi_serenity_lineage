@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public type="dimen" name="status_bar_padding_end" id="0x7f010000" />
+    <public type="dimen" name="status_bar_padding_start" id="0x7f010001" />
+    <public type="dimen" name="physical_power_button_center_screen_location_y" id="0x7f010002" />
+    <public type="dimen" name="physical_fingerprint_sensor_center_screen_location_y" id="0x7f010003" />
+    <public type="dimen" name="physical_fingerprint_sensor_center_screen_location_x" id="0x7f010004" />
+    <public type="dimen" name="physical_volume_down_button_center_screen_location_y" id="0x7f010005" />
+    <public type="dimen" name="physical_volume_up_button_center_screen_location_y" id="0x7f010006" />
+    <public type="dimen" name="max_shade_window_blur_radius" id="0x7f010007" />
+</resources>

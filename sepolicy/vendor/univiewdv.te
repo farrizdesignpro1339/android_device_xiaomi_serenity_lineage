@@ -1,0 +1,36 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type univiewdv, domain;
+typeattribute univiewdv mlstrustedsubject;
+
+type univiewdv_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(univiewdv)
+
+allow univiewdv univiewdv_exec:file { read getattr map execute open entrypoint };
+allow univiewdv vendor_configs_file_202604:dir { read getattr open search };
+allow univiewdv vendor_configs_file_202604:file { read getattr open };
+allow univiewdv slogmodem_vendor_data:dir { read write create getattr open add_name remove_name search rmdir };
+allow univiewdv slogmodem_vendor_data:file { ioctl read write create getattr setattr append map unlink rename open };
+allow univiewdv slogmodem_vendor_data:fifo_file { read write create getattr setattr append unlink rename open };
+allow univiewdv kmsg_device_202604:chr_file { read open };
+allow univiewdv kernel_202604:system { syslog_read syslog_mod };
+allow univiewdv logdr_socket_202604:sock_file { read write };
+allow univiewdv logd_202604:unix_stream_socket connectto;
+allow univiewdv vendor_file_202604:file execute_no_trans;
+allow univiewdv vendor_uniview_prop:file { read getattr map open };
+allow univiewdv vendor_uniview_prop:property_service set;
+allow univiewdv property_socket_202604:sock_file write;
+allow univiewdv proc_cmdline_202604:file { read getattr open };
+allow univiewdv init_202604:unix_stream_socket connectto;
+allow univiewdv proc_bootconfig_202604:file { read getattr open };
+allow univiewdv univiewdv:netlink_kobject_uevent_socket { read create bind getopt setopt };
+allow univiewdv proc_stat_202604:file { read getattr open };
+allow univiewdv mnt_user_file_202604:dir search;
+allow univiewdv fuse_202604:dir { read write create setattr rename open add_name remove_name reparent search rmdir };
+allow univiewdv fuse_202604:file { ioctl read write create getattr setattr append unlink rename open };
+allow univiewdv unicpu_prop_202604:file { read getattr map open };
+allow univiewdv trusty_device_new_202604:chr_file { read open };
+allow univiewdv hal_univiewaidl_default:binder call;
+allow univiewdv hal_univiewaidl_service:service_manager find;
+allow univiewdv servicemanager_202604:binder call;
+allow univiewdv proc_cmd_history_202604:file { read open };
+allow univiewdv proc_uic_ec_202604:file { read open };

@@ -1,0 +1,19 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type wifid, domain;
+
+type wifid_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(wifid)
+
+allow wifid wifid_exec:file { read getattr map execute open entrypoint };
+allow wifid prod_file:dir search;
+allow wifid prod_file:file { read getattr open };
+allow wifid self:netlink_kobject_uevent_socket { read create bind getopt setopt };
+allow wifid wifid:netlink_generic_socket { read write create getattr bind setopt };
+allow wifid sysfs_202604:file { read write setattr open };
+allow wifid proc_202604:file { read write open };
+allow wifid wifid:udp_socket { ioctl create };
+allow wifid wifid:netlink_route_socket { read write create getattr setattr bind setopt nlmsg_read nlmsg_write nlmsg_readpriv };
+allowxperm wifid wifid:udp_socket ioctl { 0x89fd };
+allow wifid mnt_vendor_file_202604:dir search;
+allow wifid mnt_vendor_file_202604:file { read getattr open };
+allow wifid vendor_fs_prop:file { read getattr map open };

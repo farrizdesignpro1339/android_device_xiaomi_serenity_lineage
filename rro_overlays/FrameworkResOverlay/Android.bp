@@ -1,0 +1,10 @@
+//
+// SPDX-FileCopyrightText: The Serenity Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+runtime_resource_overlay {
+    name: "FrameworkResOverlay",
+    res_dir: "res",
+    product_specific: true,
+}

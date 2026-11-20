@@ -1,0 +1,16 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type securesocket, domain;
+
+type securesocket_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(securesocket)
+
+allow securesocket securesocket_exec:file { read getattr map execute open entrypoint };
+allow securesocket teetz_device:chr_file { ioctl read write open };
+allow securesocket self:tcp_socket { read write create bind connect listen accept getopt setopt };
+allow securesocket self:udp_socket { read write create getattr connect getopt setopt };
+allow securesocket port_202604:tcp_socket { name_bind name_connect };
+allow securesocket port_202604:udp_socket name_bind;
+allow securesocket node_202604:tcp_socket node_bind;
+allow securesocket node_202604:udp_socket node_bind;
+allow securesocket fwmarkd_socket_202604:sock_file write;
+allow securesocket netd_202604:unix_stream_socket connectto;

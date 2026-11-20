@@ -1,0 +1,31 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type hal_enhanceaidl_default, domain;
+
+type hal_enhanceaidl_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_enhanceaidl_default)
+
+allow hal_enhanceaidl_default dumpstate_202604:binder transfer;
+allow hal_enhanceaidl_default hal_enhanceaidl_default_exec:file { read getattr map execute open entrypoint };
+allow hal_enhanceaidl_default servicemanager_202604:binder { call transfer };
+allow hal_enhanceaidl_default hal_enhanceaidl_service:service_manager { add find };
+allow hal_enhanceaidl_default app_data_file_202604:file { read write getattr };
+allow hal_enhanceaidl_default platform_app_202604:fd use;
+allow hal_enhanceaidl_default vendor_camera_prop:file { read getattr map open };
+allow hal_enhanceaidl_default prod_file:file { read write create getattr setattr open };
+allow hal_enhanceaidl_default prod_file:dir { read write create getattr open add_name search };
+allow hal_enhanceaidl_default mnt_vendor_file_202604:dir search;
+allow hal_enhanceaidl_default vendor_configs_file_202604:dir { read getattr open search };
+allow hal_enhanceaidl_default vendor_configs_file_202604:file { read getattr open };
+allow hal_enhanceaidl_default sysfs_202604:file { read write open };
+allow hal_enhanceaidl_default sysfs_dpu_vendor:file { read open };
+allow hal_enhanceaidl_default sysfs_dpu_vsp:file { read open };
+allow hal_enhanceaidl_default self:capability fowner;
+allow hal_enhanceaidl_default hal_graphics_composer_default:binder call;
+allow hal_enhanceaidl_default bootanim_system_prop_202604:file { read getattr map open };
+allow hal_enhanceaidl_default vendor_display_prop:file read;
+allow hal_enhanceaidl_default device_202604:chr_file ioctl;
+allow hal_enhanceaidl_default vendor_sys_prop:file { read getattr map open };
+allow hal_enhanceaidl_default vendor_fs_prop:file { read getattr map open };
+allow hal_enhanceaidl_default vendor_display_prop:file { read getattr map open };
+allow hal_enhanceaidl_default hal_camera_default:binder transfer;
+allow hal_enhanceaidl_default sysfs_multipanel:file { read getattr open };

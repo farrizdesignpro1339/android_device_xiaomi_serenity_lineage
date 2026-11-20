@@ -1,0 +1,41 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type aiserver_default, domain;
+typeattribute aiserver_default netdomain;
+
+type aiserver_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(aiserver_default)
+
+allow aiserver_default aiserver_default_exec:file { read getattr map execute open entrypoint };
+allow aiserver_default hal_power:memfd_file { read write getattr map };
+allow aiserver_default servicemanager_202604:binder { call transfer };
+allow aiserver_default aiserver_service:service_manager { add find };
+allow aiserver_default app_data_file_202604:file { read write getattr };
+allow aiserver_default platform_app_202604:fd use;
+allow aiserver_default system_app_202604:binder transfer;
+allow aiserver_default dev_vdsp:chr_file { ioctl read write map open };
+allow aiserver_default prod_file:dir search;
+allow aiserver_default system_app_202604:fd use;
+allow aiserver_default imgnna_device:chr_file { ioctl read write map open };
+allow aiserver_default platform_app_202604:binder { call transfer };
+allow aiserver_default hal_power_hwservice_202604:hwservice_manager find;
+allow aiserver_default hal_power_default:binder call;
+allow aiserver_default hal_power_default:binder transfer;
+allow aiserver_default proc_meminfo_202604:file { read open };
+allow aiserver_default self:capability { chown fsetid setgid setuid net_raw sys_admin sys_nice };
+allow aiserver_default proc_202604:file { read write getattr open };
+allow aiserver_default proc_interrupts_202604:file { read write open };
+allow aiserver_default proc_interrupts_202604:file getattr;
+allow aiserver_default aimodel_file:dir { read write getattr setattr open add_name remove_name search };
+allow aiserver_default aimodel_file:file { read write create getattr setattr map unlink rename open };
+type_transition aiserver_default aimodel_file:file aimodel_file;
+allow aiserver_default boot_status_prop_202604:file { read getattr map open };
+allow aiserver_default fuse_202604:dir { read write create getattr setattr rename open add_name remove_name reparent search rmdir };
+allow aiserver_default fuse_202604:file { read write create getattr setattr append map unlink rename open };
+allow aiserver_default mnt_user_file_202604:dir { read write create getattr unlink open add_name remove_name search rmdir };
+allow aiserver_default mnt_user_file_202604:file { read write create getattr map unlink rename open };
+allow aiserver_default dnsproxyd_socket_202604:sock_file { write getattr };
+allow aiserver_default dmabuf_system_heap_device_202604:chr_file { ioctl read open };
+allow aiserver_default hal_audio_default:binder call;
+allow aiserver_default hal_audio_default:binder transfer;
+allow aiserver_default hal_audio_default:fd use;
+allow aiserver_default dumpstate_202604:binder transfer;

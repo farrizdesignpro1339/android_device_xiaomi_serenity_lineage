@@ -1,0 +1,50 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type charge_logger, domain;
+
+type charge_logger_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(charge_logger)
+
+allow charge_logger charge_logger_exec:file { read getattr map execute open entrypoint };
+allow charge_logger rootfs_202604:dir { ioctl read getattr lock open watch watch_reads search };
+allow charge_logger rootfs_202604:file { ioctl read getattr lock map open watch watch_reads };
+allow charge_logger rootfs_202604:lnk_file { ioctl read getattr lock map open watch watch_reads };
+allow charge_logger cgroup_202604:dir { ioctl read getattr lock open watch watch_reads search };
+allow charge_logger cgroup_202604:file { ioctl read getattr lock map open watch watch_reads };
+allow charge_logger cgroup_202604:lnk_file { ioctl read getattr lock map open watch watch_reads };
+allow charge_logger self:capability sys_tty_config;
+allow charge_logger self:capability sys_boot;
+allow charge_logger self:netlink_kobject_uevent_socket { read create bind setopt };
+allow charge_logger sysfs_wake_lock_202604:file { ioctl read write getattr lock append map open watch watch_reads };
+allow charge_logger sysfs_battery_supply:file { ioctl read write getattr lock append map open watch watch_reads };
+allow charge_logger self:capability2 block_suspend;
+allow charge_logger self:cap2_userns block_suspend;
+allow charge_logger system_suspend_server:binder { call transfer };
+allow charge_logger system_suspend_server:fd use;
+allow charge_logger system_suspend_hwservice_202604:hwservice_manager find;
+allow charge_logger hwservicemanager_202604:binder { call transfer };
+allow charge_logger hwservicemanager_prop_202604:file { read getattr map open };
+allow charge_logger hidl_manager_hwservice_202604:hwservice_manager find;
+allow charge_logger hal_system_suspend_service_202604:service_manager find;
+allow charge_logger servicemanager_202604:binder { call transfer };
+allow charge_logger sysfs_usb_202604:file { write lock append map open };
+allow charge_logger sysfs_battery_supply:dir { ioctl read getattr lock open watch watch_reads search };
+allow charge_logger sysfs_usb_supply:dir { ioctl read getattr lock open watch watch_reads search };
+allow charge_logger sysfs_usb_supply:file { ioctl read getattr lock map open watch watch_reads };
+allow charge_logger sysfs_usb_supply:lnk_file { ioctl read getattr lock map open watch watch_reads };
+allow charge_logger sysfs_batteryinfo_202604:file { ioctl read getattr lock map open watch watch_reads };
+allow charge_logger sysfs_batteryinfo_202604:dir search;
+allow charge_logger sysfs_batteryinfo_202604:file { read getattr open };
+allow charge_logger charge_log_file:dir { write add_name remove_name search };
+allow charge_logger charge_log_file:file { ioctl read write create getattr setattr lock append map unlink rename open watch watch_reads };
+allow charge_logger init_202604:unix_stream_socket connectto;
+allow charge_logger property_socket_202604:sock_file write;
+allow charge_logger kmsg_device_202604:chr_file { read write open };
+allow charge_logger kmsg_device_202604:chr_file getattr;
+allow charge_logger mnt_vendor_file_202604:dir { open search };
+allow charge_logger vendor_data_file_202604:dir { write add_name };
+allow charge_logger vendor_data_file_202604:file { read write create append open };
+allow charge_logger prod_file:dir search;
+allow charge_logger sysfs_power_202604:dir search;
+allow charge_logger sysfs_power_202604:file read;
+allow charge_logger sysfs_power_202604:file open;
+allow charge_logger sysfs_power_202604:file getattr;

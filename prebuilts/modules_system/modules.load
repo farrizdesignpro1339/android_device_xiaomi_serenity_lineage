@@ -1,0 +1,11 @@
+mii.ko
+asix.ko
+usbnet.ko
+r8152.ko
+rtl8150.ko
+ax88179_178a.ko
+cdc_ether.ko
+cdc_eem.ko
+cdc_ncm.ko
+r8153_ecm.ko
+rfkill.ko

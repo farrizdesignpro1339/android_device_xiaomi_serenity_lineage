@@ -1,0 +1,24 @@
+# From the stock odm_sepolicy.cil and vendor_sepolicy.cil
+type hal_univiewaidl_default, domain;
+typeattribute hal_univiewaidl_default mlstrustedsubject;
+
+type hal_univiewaidl_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_univiewaidl_default)
+
+allow hal_univiewaidl_default hal_univiewaidl_default_exec:file { read getattr map execute open entrypoint };
+allow hal_univiewaidl_default vendor_configs_file_202604:dir { read getattr open search };
+allow hal_univiewaidl_default vendor_configs_file_202604:file { read getattr open };
+allow hal_univiewaidl_default slogmodem_vendor_data:dir { read write create getattr open add_name remove_name search rmdir };
+allow hal_univiewaidl_default slogmodem_vendor_data:file { read write create getattr map unlink open };
+allow hal_univiewaidl_default servicemanager_202604:binder { call transfer };
+allow hal_univiewaidl_default hal_univiewaidl_service:service_manager add;
+allow hal_univiewaidl_default kmsg_device_202604:chr_file { read open };
+allow hal_univiewaidl_default kernel_202604:system { syslog_read syslog_mod };
+allow hal_univiewaidl_default logdr_socket_202604:sock_file { read write };
+allow hal_univiewaidl_default logd_202604:unix_stream_socket connectto;
+allow hal_univiewaidl_default vendor_file_202604:file execute_no_trans;
+allow hal_univiewaidl_default mnt_user_file_202604:dir search;
+allow hal_univiewaidl_default fuse_202604:dir { read write create setattr rename open add_name remove_name reparent search rmdir };
+allow hal_univiewaidl_default fuse_202604:file { read write create getattr setattr append unlink rename open };
+allow hal_univiewaidl_default vendor_uniview_prop:file { read getattr map open };
+allow hal_univiewaidl_default system_app_202604:binder { call transfer };
