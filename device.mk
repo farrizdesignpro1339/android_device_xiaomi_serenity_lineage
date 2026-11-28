@@ -84,59 +84,8 @@ PRODUCT_PACKAGES += \
     logwrapper_vendor \
     sh_vendor
 
-# RRO overlays (prebuilt APK di prebuilts/overlay/)
-PRODUCT_PACKAGES += \
-    BluetoothLegacyOverlay \
-    BluetoothOverlay \
-    DataOnlyOverlay \
-    DataOnlySingleSimOverlay \
-    DualSimOverlay \
-    MultiuserOverlays \
-    NetworkStackOverlayGo \
-    NetworkStackOverlayGsi \
-    SettingsProviderOverlay \
-    SystemUIOverlay \
-    TetheringConfigOverlay \
-    TetheringConfigOverlayGo \
-    TetheringConfigOverlayGsi \
-    UnisocConnectivityOverlayGo \
-    UnisocConnectivityOverlayGsi \
-    unisoc_overlay_colordisplay \
-    unisoc_overlay_core \
-    unisoc_overlay_core_go \
-    unisoc_overlay_core_max_cached_processed_16 \
-    unisoc_overlay_core_navbar \
-    unisoc_overlay_core_pinner_service \
-    unisoc_overlay_core_pinner_service_qogirl6 \
-    unisoc_overlay_core_wifi_display \
-    unisoc_overlay_display_doze \
-    unisoc_overlay_display_thermal_refreshratepolicy \
-    unisoc_overlay_display_vrr \
-    unisoc_overlay_phone \
-    unisoc_overlay_phone_core \
-    unisoc_overlay_phone_hac \
-    unisoc_overlay_power_cpuT606 \
-    unisoc_overlay_power_cpuT616 \
-    unisoc_overlay_power_qogirl6 \
-    unisoc_overlay_uwb_bt_l6 \
-    unisoc_overlay_uwb_bt_m2 \
-    unisoc_overlay_uwb_bt_m3 \
-    unisoc_overlay_uwb_bt_m3le \
-    unisoc_overlay_uwb_bt_m3lite \
-    unisoc_overlay_uwb_bt_m3lite_Integ \
-    unisoc_overlay_uwb_bt_m3lite_Inter \
-    unisoc_res_overlay_colordisplay \
-    unisoc_res_overlay_power_qogirl6 \
-    unisoc_res_overlay_workduration \
-    WifiAXDLOverlay \
-    WifiAXDLOverlayGoogle \
-    WifiAXEOverlay \
-    WifiAXEOverlayGoogle \
-    WifiDisplayUnavailableOverlay \
-    WifiOnlyOverlay \
-    WifiOnlySettingsOverlay \
-    WifiOverlay \
-    WifiOverlayGoogle
+# RRO overlays (prebuilt APK stock di vendor/overlay, dipasang oleh vendor tree;
+# 51 modul prebuilt_overlay + PRODUCT_PACKAGES digenerate dari proprietary-files.txt)
 
 # RRO overlays (source-based, compile dari XML)
 PRODUCT_PACKAGES += \
