@@ -23,18 +23,21 @@ VENDOR_BP = next((p.resolve() for p in candidates if p.resolve().exists()), cand
 PREFER = re.compile(r'^    prefer: true,\n', re.M)
 
 # libmt_trusty is a prebuilt built against keymint-V3. Its generated shared_libs
-# would drag in lib_android_keymaster_keymint_utils (keymint-V4) and
-# libkeymint_support (keymint-V5), so soong aborts with "depends on multiple
-# versions of the same aidl_interface". There is no suppression flag; drop those
-# two propagated entries from this module only. The ELF NEEDED entries still
-# satisfy runtime; libkeymint_support / lib_android_keymaster_keymint_utils /
-# keymint-V4/V5-ndk are installed independently. proprietary-files.txt has no
-# field to express this, so it is applied after regeneration.
+# would drag in libkeymint (keymint-V4), lib_android_keymaster_keymint_utils
+# (keymint-V4) and libkeymint_support (keymint-V5), so soong aborts with
+# "depends on multiple versions of the same aidl_interface". There is no
+# suppression flag; drop those propagated entries from this module only. The
+# ELF NEEDED entries still satisfy runtime; libkeymint / libkeymint_support /
+# lib_android_keymaster_keymint_utils / keymint-V4/V5-ndk are installed
+# independently. proprietary-files.txt has no field to express this, so it is
+# applied after regeneration.
 LIBMT_TRUSTY = re.compile(
     r'cc_prebuilt_library_shared \{\n    name: "libmt_trusty".*?\n\}\n', re.S
 )
 KEYMINT_CONFLICT = re.compile(
-    r'^\s+"lib_android_keymaster_keymint_utils",\n|^\s+"libkeymint_support",\n',
+    r'^\s+"lib_android_keymaster_keymint_utils",\n'
+    r'|^\s+"libkeymint_support",\n'
+    r'|^\s+"libkeymint",\n',
     re.M,
 )
 
