@@ -141,7 +141,8 @@ PRODUCT_PACKAGES += \
 # RRO overlays (source-based, compile dari XML)
 PRODUCT_PACKAGES += \
     FrameworkResOverlay \
-    SystemUIOverlay
+    SerenityFrameworkResOverlay \
+    SystemUIOverlaySerenity
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true

@@ -4,7 +4,6 @@
 //
 
 runtime_resource_overlay {
-    name: "SystemUIOverlay",
-    res_dir: "res",
+    name: "SystemUIOverlaySerenity",
     product_specific: true,
 }

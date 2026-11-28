@@ -5,6 +5,5 @@
 
 runtime_resource_overlay {
     name: "FrameworkResOverlay",
-    res_dir: "res",
     product_specific: true,
 }
