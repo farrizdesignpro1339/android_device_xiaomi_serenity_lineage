@@ -123,7 +123,6 @@ TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 TARGET_NO_BOOTLOADER := true
 
 # Recovery, the stock vendor_boot carries the recovery resources
-BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.serenity
