@@ -5,6 +5,8 @@
 
 DEVICE_PATH := device/xiaomi/serenity
 
+BUILD_BROKEN_DUP_RULES := true
+
 # Architecture, arm64 with the stock 32 bit vendor runtime
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -121,6 +123,7 @@ TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 TARGET_NO_BOOTLOADER := true
 
 # Recovery, the stock vendor_boot carries the recovery resources
+BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.serenity
@@ -190,6 +193,7 @@ TARGET_BOARD_PLATFORM := ums9230
 # Not the boot hardware name, the fstab follows androidboot.hardware
 TARGET_BOOTLOADER_BOARD_NAME := serenity
 TARGET_OTA_ASSERT_DEVICE := serenity
+TARGET_IS_VAB := true
 
 # RIL
 ENABLE_VENDOR_RIL_SERVICE := true
@@ -223,3 +227,6 @@ ODM_MANIFEST_WIFIONLY_FILES := $(DEVICE_PATH)/configs/vintf/odm/manifest_wifionl
 
 # The dtb partition is all zero in the stock backup, so the dtb travels in
 # vendor_boot: prebuilts/dtb.img feeds --dtb
+
+# Inherit the proprietary files
+include vendor/xiaomi/serenity/BoardConfigVendor.mk

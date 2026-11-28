@@ -1,0 +1,9 @@
+//
+// SPDX-FileCopyrightText: The Redmi A5 (serenity) Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+runtime_resource_overlay {
+    name: "SerenityFrameworkResOverlay",
+    product_specific: true,
+}

@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2016-2025 Unisoc (Shanghai) Technologies Co., Ltd
+# SPDX-License-Identifier: LicenseRef-Unisoc-General-1.0
+
+on init
+    start splpath_util_recovery
+
+service splpath_util_recovery /system/bin/sh /system/bin/splpath_util_recovery
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0

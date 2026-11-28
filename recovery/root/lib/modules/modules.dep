@@ -1,0 +1,133 @@
+/vendor/lib/modules/goodix_fp.ko:
+/vendor/lib/modules/cpq.ko:
+/vendor/lib/modules/hqsysfs.ko: /vendor/lib/modules/hqsys_pcba.ko
+/vendor/lib/modules/slg_verify.ko: /vendor/lib/modules/battery_auth_class.ko
+/vendor/lib/modules/cpufreq_userspace.ko:
+/vendor/lib/modules/gpio.ko: /vendor/lib/modules/core.ko
+/vendor/lib/modules/sy65153_wireless_charger.ko: /vendor/lib/modules/sprd_charger_manager.ko /vendor/lib/modules/sc27xx_typec.ko /vendor/lib/modules/sprd_tcpm.ko /vendor/lib/modules/hq_charger_class.ko /vendor/lib/modules/sprd_battery_info.ko /vendor/lib/modules/hq_batt_class.ko /vendor/lib/modules/battery_auth_class.ko
+/vendor/lib/modules/unisoc_pnp.ko:
+/vendor/lib/modules/auth_battery.ko: /vendor/lib/modules/hq_batt_class.ko /vendor/lib/modules/battery_auth_class.ko
+/vendor/lib/modules/sprd_core_ctrl.ko:
+/vendor/lib/modules/cma_heap.ko: /vendor/lib/modules/ion_ipc_trusty.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/hq_tp.ko:
+/vendor/lib/modules/qvga_ic_c3z02_bydbf30a2_jk.ko: /vendor/lib/modules/sprd_qvga_drv.ko /vendor/lib/modules/sprd_camsys_pw_domain.ko
+/vendor/lib/modules/thermal-generic-adc.ko:
+/vendor/lib/modules/sc27xx_fast_charger.ko:
+/vendor/lib/modules/silead_fp.ko:
+/vendor/lib/modules/novatek_nt36528a_spi_ts.ko: /vendor/lib/modules/sprd_drm.ko /vendor/lib/modules/drm_display_helper.ko /vendor/lib/modules/sprd_gsp.ko /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/apsys_dvfs.ko /vendor/lib/modules/hqsysfs.ko /vendor/lib/modules/hqsys_pcba.ko /vendor/lib/modules/hq_tp.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/sprd_fm.ko: /vendor/lib/modules/unisoc_wcn_bsp.ko /vendor/lib/modules/sprd_pdbg.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/unisoc_iommu.ko:
+/vendor/lib/modules/sprd_wlan_combo.ko: /vendor/lib/modules/sprd_ddr_dvfs.ko /vendor/lib/modules/cfg80211.ko /vendor/lib/modules/unisoc_wcn_bsp.ko /vendor/lib/modules/sprd_pdbg.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/snd_soc_sipa.ko:
+/vendor/lib/modules/flash_ic_ocp8137.ko: /vendor/lib/modules/sprd_flash_drv.ko
+/vendor/lib/modules/hq_charger_class.ko:
+/vendor/lib/modules/audio_dai.ko: /vendor/lib/modules/audio_platform.ko /vendor/lib/modules/audio_card.ko /vendor/lib/modules/snd_soc_sipa.ko /vendor/lib/modules/snd_soc_fs15xx.ko /vendor/lib/modules/audio_misc.ko /vendor/lib/modules/musb_hdrc.ko
+/vendor/lib/modules/sprd_virt_thm.ko:
+/vendor/lib/modules/omnivision_tcm_td4160_ts.ko: /vendor/lib/modules/sprd_drm.ko /vendor/lib/modules/drm_display_helper.ko /vendor/lib/modules/sprd_gsp.ko /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/apsys_dvfs.ko /vendor/lib/modules/hqsysfs.ko /vendor/lib/modules/hqsys_pcba.ko /vendor/lib/modules/hq_tp.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/rtc_sc27xx.ko:
+/vendor/lib/modules/unisoc_freqlink.ko: /vendor/lib/modules/sprd_ddr_dvfs.ko
+/vendor/lib/modules/sprd_qvga_drv.ko: /vendor/lib/modules/sprd_camsys_pw_domain.ko
+/vendor/lib/modules/hqsys_pcba.ko:
+/vendor/lib/modules/unisoc_fsio.ko:
+/vendor/lib/modules/dynamic_readahead.ko:
+/vendor/lib/modules/sprd_flash_drv.ko:
+/vendor/lib/modules/unisoc_gnss_common_ctl_all.ko: /vendor/lib/modules/unisoc_tsensor_core.ko /vendor/lib/modules/unisoc_wcn_bsp.ko /vendor/lib/modules/sprd_pdbg.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/sprdbt_tty.ko: /vendor/lib/modules/unisoc_wcn_bsp.ko /vendor/lib/modules/sprd_pdbg.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/upm6922_charger.ko: /vendor/lib/modules/usb_phy_sprd_hs.ko /vendor/lib/modules/sprd_bc1p2.ko /vendor/lib/modules/hq_charger_class.ko /vendor/lib/modules/sprd_battery_info.ko /vendor/lib/modules/hq_batt_class.ko
+/vendor/lib/modules/audio_misc.ko: /vendor/lib/modules/musb_hdrc.ko
+/vendor/lib/modules/sprd_touchscreen_ts.ko: /vendor/lib/modules/sprd_drm.ko /vendor/lib/modules/drm_display_helper.ko /vendor/lib/modules/sprd_gsp.ko /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/apsys_dvfs.ko /vendor/lib/modules/hqsysfs.ko /vendor/lib/modules/hqsys_pcba.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/ledtrig-pattern.ko:
+/vendor/lib/modules/sprd_map.ko:
+/vendor/lib/modules/sc27xx_typec.ko: /vendor/lib/modules/sprd_tcpm.ko
+/vendor/lib/modules/usb_phy_sprd_hs.ko: /vendor/lib/modules/sprd_bc1p2.ko
+/vendor/lib/modules/sprd_uid.ko:
+/vendor/lib/modules/kprobe_filemap.ko:
+/vendor/lib/modules/simtray.ko:
+/vendor/lib/modules/uni_trace_debug.ko: /vendor/lib/modules/sprd_ddr_dvfs.ko
+/vendor/lib/modules/sprd_cpu_cooling.ko:
+/vendor/lib/modules/sprd_gsp.ko: /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/apsys_dvfs.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/unisoc_mm_reclaim.ko:
+/vendor/lib/modules/sprd_cpu_usage.ko:
+/vendor/lib/modules/sprd_camera.ko: /vendor/lib/modules/sprd_dmabuf.ko /vendor/lib/modules/sprd_sensor.ko /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/sprd_camsys_pw_domain.ko
+/vendor/lib/modules/hq_batt_class.ko:
+/vendor/lib/modules/sgm41513_charger.ko: /vendor/lib/modules/usb_phy_sprd_hs.ko /vendor/lib/modules/sprd_bc1p2.ko /vendor/lib/modules/hq_charger_class.ko /vendor/lib/modules/sprd_battery_info.ko /vendor/lib/modules/hq_batt_class.ko
+/vendor/lib/modules/unisoc_userlog.ko:
+/vendor/lib/modules/unisoc_bootinfo.ko:
+/vendor/lib/modules/sprd_pdbg.ko:
+/vendor/lib/modules/sprd_freq_limit.ko:
+/vendor/lib/modules/mmperf.ko:
+/vendor/lib/modules/qvga_ic_c3z01_ovsp0821_cxt.ko: /vendor/lib/modules/sprd_qvga_drv.ko /vendor/lib/modules/sprd_camsys_pw_domain.ko
+/vendor/lib/modules/kts_sync.ko:
+/vendor/lib/modules/unisoc_mm_ummd.ko: /vendor/lib/modules/boost_pool.ko
+/vendor/lib/modules/vdecsys_dvfs.ko:
+/vendor/lib/modules/audio_codec.ko: /vendor/lib/modules/audio_card.ko /vendor/lib/modules/snd_soc_sipa.ko /vendor/lib/modules/snd_soc_fs15xx.ko /vendor/lib/modules/audio_misc.ko /vendor/lib/modules/musb_hdrc.ko
+/vendor/lib/modules/snd_soc_fs15xx.ko:
+/vendor/lib/modules/sprd_fuel_gauge.ko: /vendor/lib/modules/sprd_charger_manager.ko /vendor/lib/modules/sc27xx_typec.ko /vendor/lib/modules/sprd_tcpm.ko /vendor/lib/modules/hq_charger_class.ko /vendor/lib/modules/sprd_battery_info.ko /vendor/lib/modules/hq_batt_class.ko /vendor/lib/modules/battery_auth_class.ko
+/vendor/lib/modules/ds28e30_verify.ko: /vendor/lib/modules/battery_auth_class.ko
+/vendor/lib/modules/sprd_camsys_pw_domain.ko:
+/vendor/lib/modules/sprd_drm.ko: /vendor/lib/modules/drm_display_helper.ko /vendor/lib/modules/sprd_gsp.ko /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/apsys_dvfs.ko /vendor/lib/modules/hqsysfs.ko /vendor/lib/modules/hqsys_pcba.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/uniber.ko:
+/vendor/lib/modules/trusty.ko:
+/vendor/lib/modules/audio_card.ko: /vendor/lib/modules/snd_soc_sipa.ko /vendor/lib/modules/snd_soc_fs15xx.ko /vendor/lib/modules/audio_misc.ko /vendor/lib/modules/musb_hdrc.ko
+/vendor/lib/modules/extcon-usb-gpio.ko:
+/vendor/lib/modules/sprd_pmic_wdt.ko:
+/vendor/lib/modules/unisoc_aphang.ko: /vendor/lib/modules/unisoc_last_kmsg.ko
+/vendor/lib/modules/sprd_sensor.ko: /vendor/lib/modules/sprd_camsys_pw_domain.ko
+/vendor/lib/modules/microarray_fp.ko:
+/vendor/lib/modules/unisoc_tsensor_core.ko:
+/vendor/lib/modules/uzram.ko: /vendor/lib/modules/unisoc_mm_emem.ko /vendor/lib/modules/unisoc_mm_ummd.ko /vendor/lib/modules/boost_pool.ko /vendor/lib/modules/unisoc_mm_reclaim.ko /vendor/lib/modules/zsmalloc.ko /vendor/lib/modules/sprd_drm.ko /vendor/lib/modules/drm_display_helper.ko /vendor/lib/modules/sprd_gsp.ko /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/apsys_dvfs.ko /vendor/lib/modules/hqsysfs.ko /vendor/lib/modules/hqsys_pcba.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/sprd_cp_dvfs.ko:
+/vendor/lib/modules/flash_ic_c3z_ocp8135b.ko: /vendor/lib/modules/sprd_flash_drv.ko
+/vendor/lib/modules/ums9230_serdes.ko: /vendor/lib/modules/mipiserdes_base.ko
+/vendor/lib/modules/sprd_bcl.ko:
+/vendor/lib/modules/focaltech_ft8057_spi_ts.ko: /vendor/lib/modules/sprd_drm.ko /vendor/lib/modules/drm_display_helper.ko /vendor/lib/modules/sprd_gsp.ko /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/apsys_dvfs.ko /vendor/lib/modules/hqsysfs.ko /vendor/lib/modules/hqsys_pcba.ko /vendor/lib/modules/hq_tp.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/sprd_suspend_helper.ko:
+/vendor/lib/modules/zsmalloc.ko:
+/vendor/lib/modules/audio_platform.ko: /vendor/lib/modules/audio_card.ko /vendor/lib/modules/snd_soc_sipa.ko /vendor/lib/modules/snd_soc_fs15xx.ko /vendor/lib/modules/audio_misc.ko /vendor/lib/modules/musb_hdrc.ko
+/vendor/lib/modules/unisoc_wcn_bsp.ko: /vendor/lib/modules/sprd_pdbg.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/pinctrl.ko: /vendor/lib/modules/core.ko
+/vendor/lib/modules/musb_sprd.ko: /vendor/lib/modules/musb_hdrc.ko
+/vendor/lib/modules/unisoc_mm_emem.ko: /vendor/lib/modules/unisoc_mm_ummd.ko /vendor/lib/modules/boost_pool.ko
+/vendor/lib/modules/cfg80211.ko:
+/vendor/lib/modules/system_heap.ko: /vendor/lib/modules/unisoc_mm_emem.ko /vendor/lib/modules/unisoc_mm_ummd.ko /vendor/lib/modules/boost_pool.ko /vendor/lib/modules/unisoc_iommu.ko
+/vendor/lib/modules/vpu.ko: /vendor/lib/modules/vdecsys_dvfs.ko /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/apsys_dvfs.ko
+/vendor/lib/modules/sprd_fuel_gauge_v2.ko: /vendor/lib/modules/sprd_fuel_gauge.ko /vendor/lib/modules/sprd_charger_manager.ko /vendor/lib/modules/sc27xx_typec.ko /vendor/lib/modules/sprd_tcpm.ko /vendor/lib/modules/hq_charger_class.ko /vendor/lib/modules/sprd_battery_info.ko /vendor/lib/modules/hq_batt_class.ko /vendor/lib/modules/battery_auth_class.ko
+/vendor/lib/modules/sprd_charger_manager.ko: /vendor/lib/modules/sc27xx_typec.ko /vendor/lib/modules/sprd_tcpm.ko /vendor/lib/modules/hq_charger_class.ko /vendor/lib/modules/sprd_battery_info.ko /vendor/lib/modules/hq_batt_class.ko /vendor/lib/modules/battery_auth_class.ko
+/vendor/lib/modules/cpumaxfreq.ko:
+/vendor/lib/modules/core.ko:
+/vendor/lib/modules/musb_hdrc.ko:
+/vendor/lib/modules/bq2560x_charger.ko: /vendor/lib/modules/sprd_battery_info.ko /vendor/lib/modules/hq_batt_class.ko
+/vendor/lib/modules/sprd_pwm_ir_tx.ko:
+/vendor/lib/modules/sprd_vpu_pw_domain.ko:
+/vendor/lib/modules/dmc_drv.ko:
+/vendor/lib/modules/drm_dma_helper.ko:
+/vendor/lib/modules/sprd_keypad.ko:
+/vendor/lib/modules/sc89601_charger.ko: /vendor/lib/modules/usb_phy_sprd_hs.ko /vendor/lib/modules/sprd_bc1p2.ko /vendor/lib/modules/hq_charger_class.ko /vendor/lib/modules/sprd_battery_info.ko /vendor/lib/modules/hq_batt_class.ko
+/vendor/lib/modules/sprd_usbpinmux.ko:
+/vendor/lib/modules/sprd_nfc_clkctl.ko:
+/vendor/lib/modules/sprd_ddr_dvfs.ko:
+/vendor/lib/modules/bq2597x_charger.ko: /vendor/lib/modules/sprd_charger_manager.ko /vendor/lib/modules/sc27xx_typec.ko /vendor/lib/modules/sprd_tcpm.ko /vendor/lib/modules/hq_charger_class.ko /vendor/lib/modules/sprd_battery_info.ko /vendor/lib/modules/hq_batt_class.ko /vendor/lib/modules/battery_auth_class.ko
+/vendor/lib/modules/gpu_pm_ums9230.ko:
+/vendor/lib/modules/sprd_tcpm.ko:
+/vendor/lib/modules/boost_pool.ko:
+/vendor/lib/modules/ssnfc.ko:
+/vendor/lib/modules/battery_auth_class.ko:
+/vendor/lib/modules/sprd_bc1p2.ko:
+/vendor/lib/modules/mmdvfs.ko: /vendor/lib/modules/sprd_camsys_pw_domain.ko
+/vendor/lib/modules/mali_kbase_ums9230.ko: /vendor/lib/modules/gpu_pm_ums9230.ko /vendor/lib/modules/unisoc_mm_emem.ko /vendor/lib/modules/unisoc_mm_ummd.ko /vendor/lib/modules/boost_pool.ko /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/mipiserdes_base.ko:
+/vendor/lib/modules/sprd_dpdm.ko:
+/vendor/lib/modules/sprd_battery_info.ko: /vendor/lib/modules/hq_batt_class.ko
+/vendor/lib/modules/sprd_dmabuf.ko:
+/vendor/lib/modules/mi_wq_dynamic_priority.ko:
+/vendor/lib/modules/qvga_ic_c3z03_sc080cs_cxt.ko: /vendor/lib/modules/sprd_qvga_drv.ko /vendor/lib/modules/sprd_camsys_pw_domain.ko
+/vendor/lib/modules/unisoc_last_kmsg.ko:
+/vendor/lib/modules/ntfs3.ko:
+/vendor/lib/modules/sprd_trng.ko:
+/vendor/lib/modules/apsys_dvfs.ko:
+/vendor/lib/modules/jpg.ko: /vendor/lib/modules/unisoc_iommu.ko /vendor/lib/modules/apsys_dvfs.ko /vendor/lib/modules/sprd_camsys_pw_domain.ko
+/vendor/lib/modules/sc27xx_pd.ko: /vendor/lib/modules/sc27xx_typec.ko /vendor/lib/modules/sprd_tcpm.ko
+/vendor/lib/modules/ion_ipc_trusty.ko: /vendor/lib/modules/trusty.ko
+/vendor/lib/modules/sprd_coresight.ko:
+/vendor/lib/modules/drm_display_helper.ko:
+/vendor/lib/modules/unisoc_ap_regdump.ko:

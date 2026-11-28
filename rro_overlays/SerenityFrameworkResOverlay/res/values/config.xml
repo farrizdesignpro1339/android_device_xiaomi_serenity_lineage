@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--
+        Keep config_biometric_sensors empty!
+        Vendor exposes AIDL android.hardware.biometrics.fingerprint.IFingerprint/default (v3)
+        with ro.vendor.fps.support=true. Defining "0:2:15" here forces AuthService /
+        FingerprintProvider into HidlToAidlSensorAdapter and breaks enrollment/auth.
+    -->
+    <string-array name="config_biometric_sensors" translatable="false" />
+
+    <!-- Side-mounted fingerprint sensor (power button) -->
+    <bool name="config_is_powerbutton_fps">true</bool>
+
+    <array name="config_sfps_sensor_props" translatable="false">
+        <item>@array/config_sfps_sensor_props_0</item>
+    </array>
+
+    <array name="config_sfps_sensor_props_0" translatable="false">
+        <item>0</item>
+        <item>720</item>
+        <item>700</item>
+        <item>80</item>
+    </array>
+</resources>

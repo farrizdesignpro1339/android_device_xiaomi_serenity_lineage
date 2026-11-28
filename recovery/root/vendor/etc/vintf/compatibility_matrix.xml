@@ -1,0 +1,15 @@
+<!--
+    Input:
+        device/sprd/vnd_generic_mpool/module/common/compatibility_matrix.xml
+-->
+<compatibility-matrix version="9.0" type="device">
+    <hal format="aidl">
+        <name>android.frameworks.sensorservice</name>
+    </hal>
+    <hal format="aidl">
+        <name>unisoc.hardware.audio.core</name>
+    </hal>
+    <system-sdk>
+        <version>37</version>
+    </system-sdk>
+</compatibility-matrix>

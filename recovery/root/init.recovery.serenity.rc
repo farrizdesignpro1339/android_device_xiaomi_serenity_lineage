@@ -1,0 +1,70 @@
+# Board-specific recovery init (Android 17)
+import /init.recovery.common.rc
+import /splpath_util_recovery.rc
+
+on early-init
+    write /sys/fs/selinux/enforce 0
+
+on fs
+    setprop crypto.ready 1
+
+# All HALs below register over AIDL (huo servicemanager), so they must be
+# started after hwservicemanager is up. Starting them earlier only yields
+# "service not found" / registration failures.
+# Recovery's sepolicy does not know the stock HAL domain labels
+# (hal_bootctl_default etc.), so everything runs as u:r:recovery:s0.
+
+on property:hwservicemanager.ready=true
+    # The stock Android 17 KeyMint binds its key blobs to the configured OS
+    # version and security patch. TWRP is based on Android 12.1, so advertise
+    # the stock values before KeyMint opens the metadata key.
+    exec_start set-keymint-os-version
+    exec_start set-keymint-os-patch
+
+    # Boot control (slot management / reboot to fastbootd)
+    start vendor.boot-default
+    start vendor.sprd.boot-aidl-V1-recovery
+
+    # Keystore2 (started by /system/etc/init/keystore2.rc on late-init)
+    # waits up to 5s for KeyMint; starting here is early enough.
+    start vendor.keymint-unisoc
+    start vendor.gatekeeper_default
+
+    # Battery / temperature for the recovery GUI (photo-safe: read-only)
+    start vendor.health-default
+
+# Keystore2 is started by /system/etc/init/keystore2.rc on late-init.
+# Do not redefine it here: duplicate service definitions are rejected by init.
+
+service set-keymint-os-version /system/bin/resetprop ro.build.version.release 17
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+service set-keymint-os-patch /system/bin/resetprop ro.build.version.security_patch 2026-10-01
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+service vendor.keymint-unisoc /vendor/bin/hw/android.hardware.security.keymint-unisoc.service.trusty --dev /dev/trusty-ipc-dev0
+    class early_hal
+    user system
+    group system drmrpc
+    # Recovery's linker config searches only /system/lib64 by default. Keep
+    # the stock KeyMint ABI together by preferring its vendor libraries.
+    setenv LD_LIBRARY_PATH /vendor/lib64:/system/lib64
+    # The stock KeyMint must not be restarted once running.
+    disabled
+    seclabel u:r:recovery:s0
+
+service vendor.gatekeeper_default /vendor/bin/hw/android.hardware.gatekeeper-service.trusty --dev /dev/trusty-ipc-dev0
+    class hal
+    user system
+    group system
+    setenv LD_LIBRARY_PATH /vendor/lib64:/system/lib64
+    disabled
+    seclabel u:r:recovery:s0

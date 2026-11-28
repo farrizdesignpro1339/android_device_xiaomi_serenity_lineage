@@ -1,0 +1,152 @@
+<!--
+    Input:
+        device/sprd/vnd_generic_mpool/module/common/manifest.xml
+        vendor/xiaomi/proprietary/mtdservice/vintf/manifest_vendor.xiaomi.hardware.aidl.mtdservice.xml
+-->
+<manifest version="9.0" type="device" target-level="202604">
+    <hal format="aidl">
+        <name>android.hardware.graphics.allocator</name>
+        <version>2</version>
+        <fqname>IAllocator/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.graphics.composer3</name>
+        <version>4</version>
+        <fqname>IComposer/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.radio.config</name>
+        <version>5</version>
+        <fqname>IRadioConfig/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.radio.data</name>
+        <version>5</version>
+        <fqname>IRadioData/slot1</fqname>
+        <fqname>IRadioData/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.radio.messaging</name>
+        <version>5</version>
+        <fqname>IRadioMessaging/slot1</fqname>
+        <fqname>IRadioMessaging/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.radio.modem</name>
+        <version>5</version>
+        <fqname>IRadioModem/slot1</fqname>
+        <fqname>IRadioModem/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.radio.network</name>
+        <version>5</version>
+        <fqname>IRadioNetwork/slot1</fqname>
+        <fqname>IRadioNetwork/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.radio.sim</name>
+        <version>5</version>
+        <fqname>IRadioSim/slot1</fqname>
+        <fqname>IRadioSim/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.radio.voice</name>
+        <version>5</version>
+        <fqname>IRadioVoice/slot1</fqname>
+        <fqname>IRadioVoice/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.secure_element</name>
+        <fqname>ISecureElement/SIM1</fqname>
+        <fqname>ISecureElement/SIM2</fqname>
+    </hal>
+    <hal format="native">
+        <name>mapper</name>
+        <fqname>@5.0/arm</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.sprd.hardware.enhance</name>
+        <version>4</version>
+        <fqname>IEnhance/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.display.config</name>
+        <fqname>IDisplayConfig/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.carrierIdentifier</name>
+        <fqname>ICarrierIdentifier/slot1</fqname>
+        <fqname>ICarrierIdentifier/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.data</name>
+        <version>3</version>
+        <fqname>IExtRadioData/slot1</fqname>
+        <fqname>IExtRadioData/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.ims</name>
+        <version>3</version>
+        <fqname>IImsRadio/slot1</fqname>
+        <fqname>IImsRadio/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.lite</name>
+        <fqname>ILiteRadio/liteservice2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.mbs</name>
+        <fqname>IExtRadioMbs/slot1</fqname>
+        <fqname>IExtRadioMbs/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.messaging</name>
+        <version>3</version>
+        <fqname>IExtRadioMessaging/slot1</fqname>
+        <fqname>IExtRadioMessaging/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.modem</name>
+        <version>3</version>
+        <fqname>IExtRadioModem/slot1</fqname>
+        <fqname>IExtRadioModem/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.network</name>
+        <version>3</version>
+        <fqname>IExtRadioNetwork/slot1</fqname>
+        <fqname>IExtRadioNetwork/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.satellite</name>
+        <fqname>IExtRadioSatellite/slot1</fqname>
+        <fqname>IExtRadioSatellite/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.sim</name>
+        <version>3</version>
+        <fqname>IExtRadioSim/slot1</fqname>
+        <fqname>IExtRadioSim/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.radio.voice</name>
+        <version>3</version>
+        <fqname>IExtRadioVoice/slot1</fqname>
+        <fqname>IExtRadioVoice/slot2</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.unisoc.hardware.unicomposer</name>
+        <fqname>IUniComposer/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.xiaomi.hardware.aidl.mtdservice</name>
+        <fqname>IMTService/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.xiaomi.hardware.fx.tunnel</name>
+        <fqname>IMiFxTunnel/default</fqname>
+    </hal>
+    <sepolicy>
+        <version>202604</version>
+    </sepolicy>
+</manifest>
