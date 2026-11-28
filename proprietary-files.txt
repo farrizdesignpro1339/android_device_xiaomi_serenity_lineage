@@ -623,7 +623,6 @@ vendor/lib64/vkengine.unisoc.so
 vendor/apex/com.google.android.widevine.nonupdatable.apex
 vendor/bin/hw/android.hardware.drm-service-lazy.clearkey
 vendor/etc/init/android.hardware.drm-service-lazy.clearkey.rc
-vendor/etc/vintf/manifest/android.hardware.drm-service.clearkey.xml
 vendor/lib64/mediacas/libclearkeycasplugin.so
 vendor/lib64/mediadrm/libdrmclearkeyplugin.so
 
@@ -644,7 +643,6 @@ vendor/lib64/libvendor.xiaomi.hardware.fx.tunnel.so
 vendor/bin/hw/android.hardware.gatekeeper-service.nonsecure
 vendor/bin/hw/android.hardware.gatekeeper-service.trusty
 vendor/etc/init/android.hardware.gatekeeper-service.trusty.rc
-vendor/etc/vintf/manifest/android.hardware.gatekeeper-service.trusty.xml
 
 # GNSS
 vendor/lib64/hw/gps.default.so
@@ -729,7 +727,6 @@ vendor/lib64/libkeymint.so
 # Sensors
 vendor/bin/hw/android.hardware.sensors-service.multihal
 vendor/etc/init/android.hardware.sensors-service-multihal.rc
-vendor/etc/vintf/manifest/android.hardware.sensors-multihal.xml
 vendor/lib64/hw/sensors.unisoc.so
 vendor/lib64/libcamera2ndk_vendor.so
 vendor/lib64/libhidparser_sensor.so
@@ -840,7 +837,6 @@ vendor/bin/beerocks_agent
 vendor/bin/beerocks_cli
 vendor/bin/beerocks_controller
 vendor/bin/beerocks_fronthaul
-vendor/bin/blkdiscard
 vendor/bin/bml_service
 vendor/bin/boardid_bin
 vendor/bin/boringssl_self_test64
@@ -858,13 +854,10 @@ vendor/bin/cp_diskserver_v2
 vendor/bin/cplogctl
 vendor/bin/dcxsrv
 vendor/bin/dpc
-vendor/bin/dumpsys
 vendor/bin/engpc
 vendor/bin/engpcctl
 vendor/bin/fm_tools
 vendor/bin/fsiocontrol
-vendor/bin/getfattr
-vendor/bin/getopt
 vendor/bin/gpsd
 vendor/bin/halo_control
 vendor/bin/ieee1905_transport
@@ -879,10 +872,8 @@ vendor/bin/npi_server
 vendor/bin/path_manager
 vendor/bin/phasecheckserver
 vendor/bin/refnotify
-vendor/bin/rkp_factory_extraction_tool64
 vendor/bin/rpmbserver
 vendor/bin/sensortest
-vendor/bin/setfattr
 vendor/bin/slogmodem_vendor
 vendor/bin/splpath_util
 vendor/bin/sprdsocketproxyd
