@@ -152,6 +152,7 @@ vendor/lib64/libanc_single_rt_bokeh.so
 vendor/lib64/libarcsoft_beautyshot.so
 vendor/lib64/libbokeh_depth.so
 vendor/lib64/libbokeh_gaussian.so
+vendor/lib64/libc++_shared.so
 vendor/lib64/libcamPcc4.0.so
 vendor/lib64/libcam_otp_parser.so
 vendor/lib64/libcambr_isp2.7.so
